@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="_template2.xhtml">
+
+        <ui:define name="titulo">
+            <title>Clínica Veterinária - Cartão Virtual</title>
+        </ui:define>
+
+        <ui:define name="conteudo">
+
+            <div class="container">
+
+                <div class="page-header">
+                    <h:messages id="msg" class="fonteSansHelvetica alerta alert alert-danger"/>
+                </div>
+
+                <div class="form-group" style="padding: 20px; background-color: #008B8B">
+                    <h:form >
+
+                        <div class="col-sm-10" > <div class="page-header"></div>  <!-- Traço -->
+                            <font color="#fff">
+                                <h2> Cartão Virtual </h2>
+
+                                <div class="col-sm-4" >
+                                    <h:outputText value="Selecione o nome do animal" for="nomeAnim" />
+                                    <h:selectOneMenu id="nomeAnim" class="form-control" 
+                                                     value="#{pedidoController.pedido.nomeAnim}">
+                                        <f:selectItem itemLabel="Selecionar nome animal" noSelectionOption="true"/>
+                                        <f:selectItems value="#{pessoaController.todosAnimais}" var="end" 
+                                                       itemLabel="#{end.nomeAni} - #{end.peso}" 
+                                                       itemValue="#{end.nomeAni}"
+                                                       pt:required="" />
+
+                                    </h:selectOneMenu>
+
+                                </div>
+
+                                <div class="col-sm-4" >
+                                    <h:outputText value="Vacinas" for="vacina" />
+                                    <h:selectOneMenu class="form-control" id="nomeVac" 
+                                                     value="#{pedidoController.pedido.nomeVac}">
+                                        <f:selectItem itemLabel="Selecionar vacina" noSelectionOption="true"/>
+                                        <f:selectItems value="#{vacinaController.todasVacinas}" var="vacina" 
+                                                       itemLabel="#{vacina.nome} - #{vacina.dose} - 
+                                                       #{vacina.descricao}" 
+                                                       itemValue="#{vacina.nome}"
+                                                       pt:required="" />
+                                    </h:selectOneMenu>
+                                </div>
+
+                                <div class="col-sm-4" >
+                                    <h:outputText value="Vacina-Dose" for="dose" />
+                                    <h:selectOneMenu class="form-control" id="doseVac" 
+                                                     value="#{pedidoController.pedido.doseVac}">
+                                        <f:selectItem itemLabel="Selecionar dose" noSelectionOption="true"/>
+                                        <f:selectItems value="#{vacinaController.todasVacinas}" var="vacina" 
+                                                       itemLabel="#{vacina.nome} - #{vacina.dose}" 
+                                                       itemValue="#{vacina.dose}"
+                                                       pt:required="" />
+                                    </h:selectOneMenu>
+                                </div>
+
+                            </font>
+                        </div>
+
+
+                        <font color ="#FFF">
+
+                            <div class="form-group"> <br/>
+
+                                <div class="col-sm-4">
+                                    <br></br><br></br><br></br>
+
+                                    <h:outputText value="Observações" for="obs" />
+                                    <h:inputText id="obs" class="form-control" 
+                                                 value="#{pedidoController.pedido.obs}" />
+                                    <br></br><br></br></div>
+                                <h:commandButton type="submit" class="btn btn-success btn-block" 
+                                                 value="Gravar Dados" action="#{pedidoController.gravarCartao()}" />
+
+                            </div>
+                        </font>
+
+                    </h:form> 
+
+
+
+                </div>
+
+                <div class="col-sm-6" >
+                    <font color ="#FFF">
+                        <h:dataTable  style="background-color: #008B8B" class="table table-bordered" 
+                                      value = "#{pessoaController.user }" var="user">
+
+                            <h:column>
+                                <f:facet name="header">Dono(a) do animal</f:facet>
+                                <h:outputText value="#{user.nome}"/>
+                            </h:column>
+
+                        </h:dataTable> </font>
+
+                </div>
+
+                <div class="col-sm-6" >  
+                    <font color ="#FFF">
+                        <h:dataTable style="background-color: #008B8B" class="table table-bordered" 
+                                     value="#{pessoaController.todosAnimais}" var="end">
+
+
+                            <h:column>
+                                <f:facet name="header">Nome do pet</f:facet>
+                                <h:outputText value="#{end.nomeAni}"/>
+                            </h:column>
+
+                        </h:dataTable>
+
+                    </font>
+
+                </div>
+
+
+                <form action="phpmailer/phpmailer_envio.php">
+                    <font color ="#FFF">
+                        <div class="pager"></div>  <!-- Formulario vacinas cadastradas -->
+
+                        <font color="#fff"><h2 style="background-color: #008B8B; text-align: center">Dados cartão</h2></font>
+                        <h:dataTable style="background-color: #008B8B" class="table table-bordered" 
+                                     value="#{pedidoController.todosPedidos}" var="pedido">
+
+                            <h:column>
+                                <f:facet name="header">Nome do Animal</f:facet>
+                                <h:outputText value="#{pedido.nomeAnim}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Vacinas aplicadas</f:facet>
+                                <h:outputText value="#{pedido.nomeVac}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Dose </f:facet>
+                                <h:outputText value="#{pedido.doseVac}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Observações</f:facet>
+                                <h:outputText value="#{pedido.obs}"/>
+                            </h:column>
+
+                        </h:dataTable>
+
+                    </font>
+                    <button type="submit" formmethod="POST">Enviar cartão para meu e-mail</button>
+                </form>
+            </div>
+
+            <br/>
+
+        </ui:define>
+
+    </ui:composition>	    
+
+</html>

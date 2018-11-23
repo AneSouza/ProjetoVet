@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <ui:composition template="_template2.xhtml">
+
+        <ui:define name="titulo">
+            <title>Clínica Veterinária - Vacinas</title>
+        </ui:define>
+
+        <ui:define name="conteudo">
+
+            <div class="container" >
+
+                <div class="page-header">
+                    <br></br>
+                    <h:messages id="msg" class="fonteSansHelvetica alert alert-danger"/>
+                </div>
+
+                <h:form>
+                    <font color ="#FFF">
+                        <div class="col-sm-5" style="background-color: #008B8B; padding: 20px">
+
+                            <div class="form-group col-md-8"> 
+
+                                <h2 align="center">Inserir Vacina</h2>
+                                <a href="tipo.xhtml"><font color="#fff"><h2>Cadastre o Tipo</h2></font></a>
+
+                                <div class="form-group col-md-8">
+                                    <h:outputLabel value="Nome" for="nome" />
+                                    <h:inputText id="nome" class="form-control" value="#{vacinaController.vacina.nome}" 
+                                                 pt:required="" required="true" requiredMessage="Nome Obrigatorio"/>
+
+                                </div>
+
+                                <div class="form-group col-md-8">
+                                    <h:outputLabel value="Dose" for="dose" />
+                                    <h:inputText id="dose" class="form-control" value="#{vacinaController.vacina.dose}" 
+                                                 pt:required="" required="true" requiredMessage="Dose Obrigatorio"/>
+
+                                </div>
+
+                                <div class="form-group col-md-8">
+                                    <h:outputLabel value="Descricao" for="descricao" />
+                                    <h:inputText id="descricao" class="form-control" value="#{vacinaController.vacina.descricao}"
+                                                 pt:required="" required="true" requiredMessage="Descricao Obrigatorio"/>
+
+                                </div>
+
+                                <div class="form-group col-md-8">
+                                    <h:outputLabel value="Selecione um tipo" for="tipo"/>
+                                    <h:selectOneMenu id="tipo" class="form-control" value="#{vacinaController.tipoId}" required="true" 
+                                                     requiredMessage="Tipo Obrigatorio">
+                                        <f:selectItem itemLabel = "Selecionar" noSelectionOption="true"/>
+                                        <f:selectItems value ="#{vacinaController.todosTipos}" var = "tipo" itemLabel="#{tipo.tipo}"
+                                                       itemValue="#{tipo.id}" pt:required=""/>
+
+                                    </h:selectOneMenu>
+
+                                </div>
+
+                            </div>
+
+                            <br/><br/>
+
+
+
+                            <br/>
+                            <h:commandButton type="submit" class="btn btn-success btn-block" value="Cadastrar Vacina" 
+                                             action="#{vacinaController.gravar()}"/>
+                        </div>
+                    </font>
+                </h:form>
+
+
+
+
+                <h:form>
+                    <font color ="#FFF">
+                        <div class="pager"></div>  <!-- Formulario vacinas cadastradas -->
+
+                        <font color="#fff"><h2 style="background-color: #008B8B; text-align: center">Vacinas Cadastradas</h2></font>
+                        <h:dataTable style="background-color: #008B8B" class="table table-bordered" 
+                                     value="#{vacinaController.todasVacinas}" var="vacina">
+
+                            <h:column>
+                                <f:facet name="header">Nome </f:facet>
+                                <h:outputText value="#{vacina.nome}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Tipo </f:facet>
+                                <h:outputText value="#{vacina.tipo.tipo}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Dose </f:facet>
+                                <h:outputText value="#{vacina.dose}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Descricao </f:facet>
+                                <h:outputText value="#{vacina.descricao}"/>
+                            </h:column>
+
+
+                            <h:column>
+                                <f:facet name="header">Alterar</f:facet>
+                                <h:commandButton type="submit" class="btn btn-success btn-sm" value="Alterar Vacina" 
+                                                 action="#{vacinaController.atualizaVacina(vacina)}">
+                                </h:commandButton>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Remover</f:facet>
+                                <h:commandButton type="submit" class="btn btn-danger btn-sm" value="Remover Vacina" 
+                                                 action="#{vacinaController.remover(vacina)}">
+                                </h:commandButton>
+                            </h:column>
+
+                        </h:dataTable>
+                    </font>
+                </h:form>
+
+
+            </div>
+
+            <br/>
+
+        </ui:define>
+
+    </ui:composition>		    
+</html>
+

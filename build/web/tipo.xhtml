@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <ui:composition template="_template2.xhtml">
+
+        <ui:define name="titulo">
+            <title>Tipos de Vacinas</title>
+        </ui:define>
+
+        <ui:define name="conteudo">
+
+            <div class="container">
+
+                <div class="page-header">
+                    <br></br>
+                    <h:messages id="msg" class="fonteSansHelvetica alert alert-danger"/>
+                </div>
+
+                <h:form>
+
+                    <font color ="#FFF">
+                        <div class="col-sm-5" style="background-color: #008B8B; padding: 20px">
+
+                            <div class="form-group col-sm-6">
+                                <h2>Novo Tipo</h2>
+                                <h:outputText value="Tipo" for ="tipo"/>
+                                <h:inputText id="tipo" class="form-control" value="#{tipoController.tipo.tipo}"
+                                             pt:required=""/>
+                            </div>
+                            <h:commandButton type="submit" class="btn btn-success btn-block" 
+                                             value="Cadastrar Tipo" action="#{tipoController.gravar()}"/>
+                        </div>
+                    </font>
+                </h:form>
+
+
+                <h:form>
+
+                    <font color ="#FFF">
+                        <div class="pager"></div>  <!-- mostrar tipos cadastrados -->
+
+                        <h2 style="background-color:  #008B8B; text-align: center">Tipos Cadastrados</h2>
+
+                        <h:dataTable   style="background-color: #008B8B" class="table table-bordered" value="#{tipoController.todosTipos}" var="tipo">
+
+                            <h:column>
+                                <f:facet name="header">Tipo</f:facet>
+                                <h:outputText value="#{tipo.tipo}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Alterar</f:facet>
+                                <h:commandButton type="submit" class="btn btn-success btn-sm" 
+                                                 value="Alterar Tipo" 
+                                                 action="#{tipoController.atualizaTipo(tipo)}">
+                                </h:commandButton>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Remover</f:facet>
+                                <h:commandButton type="submit" class="btn btn-danger btn-sm" 
+                                                 value="Remover Tipo" action="#{tipoController.remover(tipo)}"/>
+                            </h:column>
+
+                        </h:dataTable> 
+
+                    </font>
+                </h:form> 
+
+
+            </div>
+            <br/>
+
+        </ui:define>
+
+    </ui:composition>		    
+</html>

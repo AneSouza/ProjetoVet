@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	>
+	
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="titulo">
+		<title>Tio Phil Delivery - Clientes</title>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		    
+		    <div class="container">
+		      
+		      <div class="page-header">
+		        <h1>Clientes</h1>
+		      </div>	 
+          	  
+          	  <div class="row">
+            	<div class="col-sm-12">
+            		<h2>Clientes Cadastrados:</h2>
+			  		<h:form>
+			    		<h:dataTable style="background-color: #F5DA81" class="table table-striped" 
+			    			value = "#{pessoaController.todosPessoa}" var="pessoa">
+							
+							<h:column>
+				    			<f:facet name="header">Nome </f:facet>
+				    			<h:outputText value="#{pessoa.nome}"/>
+				    		</h:column>
+				    		
+				    		<h:column>
+				    			<f:facet name="header">CPF </f:facet>
+				    			<h:outputText value="#{pessoa.cpf}"/>
+				    		</h:column>
+							
+							<h:column>
+				    			<f:facet name="header">Login </f:facet>
+				    			<h:outputText value="#{pessoa.login}"/>
+				    		</h:column>
+				    		
+				    		<h:column>
+				    			<f:facet name="header">E-mail</f:facet>
+				    			<h:outputText value="#{pessoa.email}"/>
+				    		</h:column>
+							
+				    		
+			    		</h:dataTable>
+		      		</h:form>
+            	</div>
+          	  </div>
+		
+		    </div> 
+		
+		    <br/>
+		    
+		</ui:define>
+	
+
+
+</ui:composition>	    
+		  
+</html>
+

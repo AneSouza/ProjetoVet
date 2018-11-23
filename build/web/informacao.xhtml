@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+
+    <ui:composition template="_template2.xhtml">
+
+        <ui:define name="titulo">
+            <title>Clínica Veterinária</title>
+        </ui:define>
+
+        <ui:define name="conteudo">
+
+            <div class="container" style="">
+                <head>
+                    <!--  estilo das letras e fundo -->
+                    <style>
+                        body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
+                        .menu {display: none}
+                        .bgimg {
+                            background-repeat: repeat-y;
+                            background-size: ;
+
+                            background-image: url("img/patasteste.jpg");
+                            background-attachment: fixed;
+                            background-position: left;
+
+                            min-width:50%;
+
+                        }
+              
+                        .alerta{
+                            list-style-type : none;
+                        }
+
+                    </style>
+                </head>
+
+                <body>
+                    <br></br><br></br><br></br>
+                    <div class="col-sm-15">
+                        <h1 align="center">
+                            <b>IMPORTANTE!</b>
+                        </h1>
+
+                        <h5 align="center">
+                            Quais vacinas meu pet precisa tomar?
+                            <p>E se ele nunca foi vacinado? Quando são essas vacinas?</p>
+                            <p>Saiba mais e veja o calendário de vacinação para o seu cachorro ou seu gato.</p>
+                            <p>As vacinas são indispensáveis para a saúde do animal e dos donos, 
+                                os filhotes devem ser vacinados a partir das 6 semanas de vida e
+                                seguir os intervalos recomendados pelo veterinário.</p>
+                            
+                        </h5>
+
+                    </div>
+
+                    <br></br><br></br>
+
+                    <div class="col-sm-15" align="center">
+                        <img src="img/tabela_vac_cao.png" />
+                    </div>
+                    
+                    <br></br><br></br>
+                    <br></br><br></br>
+                    
+                    <div lass="col-sm-15" align="center">
+                        <img src="img/tabela_vac_gato.png" />
+                    </div>
+                 
+                </body>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

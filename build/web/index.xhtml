@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+    <head>
+
+        <title>Clínica Veterinária</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <!-- Custom CSS -->
+        <link href="bootstrap/css/theme.css" rel="stylesheet"/>
+        <!-- Font Awesome -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+        <!-- Google Fonts -->   
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic,700italic|Montserrat:400,700" 
+              rel="stylesheet" type="text/css"/>
+        <!-- icone na parte superior -->
+        <link rel="shortcut icon" href="img/patinhas.png" type="image/x-icon" />
+        <!-- utilizando Bootstrap na barra de menu -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+        <style>
+
+            .bgimg {
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-image: url("img/logo2.jpg");
+                min-height: 90%;
+            }
+
+            .alerta2 {
+                list-style-type: none;
+                margin-top: 60px;
+            }
+        </style>
+
+    </head>
+
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!-- barra Navegacao -->
+
+        <nav class="navbar navbar-custom navbar affix-to" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" 
+                            data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="index.xhtml">
+                        PetLove </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.xhtml">Página Inicial</a></li>
+                        <li><a href="curiosidades.xhtml">Curiosidades</a></li>
+                        <li><a href="sobre.xhtml">Quem somos</a></li>
+                        <li><a href="conta2.xhtml">Cadastre-se</a></li>
+
+                        <!--Começo modal login -->
+
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
+
+                        <!-- Modal -->
+                        <div class = "modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                    </div>
+                                    <div class="modal-body" >
+                                        <B  align="center"><span>Não possui cadastro?</span></B>
+                                        <a href="conta2.xhtml">Clique aqui</a>
+                                        <h:form >
+                                            <div class="form-group">
+                                                <h:outputLabel value="Login" for="login"/>
+                                                <h:inputText id="login" 
+                                                             value="#{loginController.user.login}" 
+                                                             required="true" requiredMessage="Login obrigatório."
+                                                             class="form-control"/>
+                                                <h:message for="login"/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <h:outputLabel value="Senha" for="senha"/>
+                                                <h:inputText id="senha" 
+                                                             value="#{loginController.user.senha}" 
+                                                             required="true" requiredMessage="Senha obrigatória."
+                                                             class="form-control">
+                                                    <f:passThroughAttribute name="type" value="password"/>
+                                                </h:inputText>
+                                                <h:message for="senha"/>
+                                            </div>
+
+                                            <h:commandButton value="Login" class="btn btn-primary btn-block"
+                                                             action="#{loginController.logar}" />
+                                        </h:form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!--fim modal login -->
+
+
+
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+        <!-- Final Barra navegação  -->
+
+        <!-- Header chamando e configurando a imagem-->
+        <header class="bgimg w3-display-container " id="home"> <h:messages
+                id="msg" class="fonteSansHelvetica alert alert-success alerta2" />
+
+            <div class="w3-display-middle w3-center">
+
+
+            </div>
+        </header>
+        <container>
+            <row>
+                <column col-md="2" align="center">
+                    <!-- texto /Apresentação -->
+
+                    <!--  <column col-md="4">
+                      <p>
+                            <h1>  SEU AMIGO PET EM BOAS MÃOS </h1>
+                            <br> </br>
+                            <p align="center">A Clínica Veterinária Cuidar é referência no atendimento a animais de pequeno porte. </p>
+                            <p align="center">Equipamentos e instalações modernas, aliadas ao alto padrão de higiene, sempre foram a nossa preocupação para seu amigo pet.
+                                <p align="center">Nosso atendimento  vai além do consultório, onde você tem  acesso ao médico veterinário 24 horas por dia através das mídias sociais, assim estamos à sua disposição 24 horas por dia 
+                                </p>   </p> </p>
+                    </column>
+                    <br> </br> <br> </br>-->
+
+                    <div class="col-4 col-6-medium col-12-small">
+
+                        <section>
+                            <a href="informacao.xhtml" class="image featured"><img src="img/patasteste.jpg" alt="" /></a>
+                            <div class="col-12">
+                                <!-- <ul class="actions">
+                                    <li><a href="#" class="button icon fa-file">Tell Me More</a></li>
+                                </ul> -->
+                            </div>
+
+                        </section>
+
+                    </div>
+                </column>
+            </row>
+        </container>
+
+
+
+
+
+        <!-- Footer -->
+        <footer>
+
+
+            <container>
+                <row>
+                    <column col-md="2" align="center">
+                        <h3  align="center" >  DOCUMENTAÇÃO </h3>
+                        <p>
+                            <a href="img/ClassDiagCli.jpg" class="btn btn-default">Diagrama
+                                de Classes</a> <a href="img/CasoUsoCli.jpg"
+                                              class="btn btn-default">Casos de Uso</a>
+
+                                              <a href="img/ClassDiagCli.jpg" class="btn btn-default">Ver
+                                Modelo BD</a>
+                        </p>
+                    </column>
+
+                </row>
+                <hr />
+            </container>
+            <ul class="list-inline banner-social-buttons">
+                <li>
+                    <a href="https://twitter.com/wowthemesnet" class="btn btnghost btn-lg"><i class="fa fa-twitter fa-fw"></i><span class="network-name">Twitter</span></a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/pages/wowthemesnet/562560840468823" class="btn btnghost btn-lg"><i class="fa fa-facebook fa-fw"></i><span class="network-name">Facebook</span></a>
+                </li>
+                <li>
+                    <a href="https://plus.google.com/u/0/b/110916582192388695332/110916582192388695332/posts" class="btn btnghost btn-lg"><i class="fa fa-google-plus fa-fw"></i><span class="network-name">Google+</span></a>
+                </li>
+            </ul> 
+
+            <div class="container text-center">
+                <p class="credits">
+                    Copyright &copy;  VetClínica<br/>
+                </p>
+
+            </div>
+        </footer>
+        <!-- Footer -->
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Plugin JavaScript -->
+        <script src="js/jquery.easing.min.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="js/theme.js"></script>
+    </body>
+
+</html>
