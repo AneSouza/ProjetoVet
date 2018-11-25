@@ -44,7 +44,7 @@ public class loginController {
     public String deslogar() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getFlash().setKeepMessages(true);
-        context.addMessage(null, new FacesMessage("Fique de olho nas vacinas!" + user.getNome()));
+        context.addMessage(null, new FacesMessage("Fique de olho nas vacinas!"));
         context.getExternalContext().getSessionMap().remove("usuariologado");
         return "index?faces-redirect=true";
 

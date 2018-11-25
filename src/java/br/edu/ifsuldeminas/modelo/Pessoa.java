@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -31,8 +32,8 @@ public class Pessoa {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
     private List<Animal> ends = new LinkedList<Animal>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
-    private List<Pedido> peds = new LinkedList<Pedido>();
+    @OneToOne
+    private Pedido pedido;
 
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date nasc;
@@ -101,13 +102,7 @@ public class Pessoa {
         this.telefone = telefone;
     }
 
-    public List<Pedido> getPeds() {
-        return peds;
-    }
-
-    public void setPeds(List<Pedido> peds) {
-        this.peds = peds;
-    }
+  
 
     public Boolean getPermissao() {
         return permissao;
@@ -123,6 +118,14 @@ public class Pessoa {
 
     public void setNasc(java.util.Date nasc) {
         this.nasc = nasc;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
 }

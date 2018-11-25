@@ -12,7 +12,7 @@
     <ui:composition template="_template2.xhtml">
 
         <ui:define name="titulo">
-            <title>Clínica Veterinária</title>
+            <title>Clínica Veterinária - Cadastre-se</title>
         </ui:define>
 
         <ui:define name="conteudo">
@@ -73,6 +73,7 @@
                                                  pt:type="email" pt:placeholder="Ex.: teste@teste.com" 
                                                  pt:required="" required="true" requiredMessage="Email obrigatório!"/>
                                 </div>
+
                                 <div class="form-group col-md-6">
                                     <B><h:outputText value="Login" for="login"/></B>
                                     <h:inputText id="login"  class="form-control" value="#{pessoaController.pessoa.login}"
@@ -100,7 +101,8 @@
                             </font>
                         </h:form>
                         <!-- login abaixo do cadastrar -->
-                        <br></br><br></br>
+                    
+                        <div class="page-header"></div>  <!-- Traço -->
 
                         <h:form >
                             <font color="#fff">
@@ -130,10 +132,10 @@
                         </h:form>
 
 
-
+                        
                     </div>
                 </font>
-            </div>
+            </div><br></br><br></br>
         </ui:define>
 
     </ui:composition>	    

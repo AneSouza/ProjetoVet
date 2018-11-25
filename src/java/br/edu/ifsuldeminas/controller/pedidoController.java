@@ -80,21 +80,20 @@ public class pedidoController {
         this.vacinaId = vacinaId;
     }
 
-
 /////////////////////////////////// gravar vacina
     public void gravarCartao() {
-//        Tipo t = new DAO<Tipo>(Tipo.class).listaPorId(this.tipoId);
-//        vacina.setTipo(t);
+        FacesContext context = FacesContext.getCurrentInstance();
+        Pessoa p = (Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
         if (this.pedido.getId() == null) {
             new DAO<Pedido>(Pedido.class).adiciona(pedido);
         } else {
             new DAO<Pedido>(Pedido.class).atualiza(pedido);
         }
         this.pedido = new Pedido();
-       
+
     }
-    
-     public void inserir(Pedido pedido) {
+
+    public void inserir(Pedido pedido) {
 
         if (pedido.getId() == null) {
             new DAO<Pedido>(Pedido.class).adiciona(pedido);
@@ -115,9 +114,10 @@ public class pedidoController {
 //        new DAO<Pedido>(Pedido.class).atualiza(pedido);
 //
 //    }
-
 ///////////////////////////////////lista os dados do cartao
     public List<Pedido> getTodosPedidos() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Pessoa p = (Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
         return new DAO<Pedido>(Pedido.class).listaTodos();
     }
 
@@ -142,10 +142,11 @@ public class pedidoController {
 
     }
 /////////////////////////////////// listar vacina
+
     public List<Vacina> getTodasVacinas() {
         return new DAO<Vacina>(Vacina.class).listaTodos();
     }
-    
+
 ///////////////////////////////////verif
 //    public List<Pedido> getTodosCartoes() {
 //        FacesContext context = FacesContext.getCurrentInstance();
@@ -154,5 +155,4 @@ public class pedidoController {
 //        return p.getPeds();
 //
 //    }
-
 }

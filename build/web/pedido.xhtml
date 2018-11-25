@@ -91,13 +91,47 @@
 
                     </h:form> 
 
+
+
                 </div>
 
-                <h:form>
+                <div class="col-sm-6" >
+                    <font color ="#FFF">
+                        <h:dataTable  style="background-color: #008B8B" class="table table-bordered" 
+                                      value = "#{pessoaController.user }" var="user">
+
+                            <h:column>
+                                <f:facet name="header">Dono(a) do animal</f:facet>
+                                <h:outputText value="#{user.nome}"/>
+                            </h:column>
+
+                        </h:dataTable> </font>
+
+                </div>
+
+                <div class="col-sm-6" >  
+                    <font color ="#FFF">
+                        <h:dataTable style="background-color: #008B8B" class="table table-bordered" 
+                                     value="#{pessoaController.todosAnimais}" var="end">
+
+
+                            <h:column>
+                                <f:facet name="header">Nome do pet</f:facet>
+                                <h:outputText value="#{end.nomeAni}"/>
+                            </h:column>
+
+                        </h:dataTable>
+
+                    </font>
+
+                </div>
+
+
+                <form action="phpmailer/phpmailer_envio.php">
                     <font color ="#FFF">
                         <div class="pager"></div>  <!-- Formulario vacinas cadastradas -->
 
-                        <font color="#fff"><h2 style="background-color: #008B8B; text-align: center">Meu cartão</h2></font>
+                        <font color="#fff"><h2 style="background-color: #008B8B; text-align: center">Dados cartão</h2></font>
                         <h:dataTable style="background-color: #008B8B" class="table table-bordered" 
                                      value="#{pedidoController.todosPedidos}" var="pedido">
 
@@ -124,8 +158,8 @@
                         </h:dataTable>
 
                     </font>
-
-            </h:form>
+                    <button type="submit" formmethod="POST">Enviar cartão para meu e-mail</button>
+                </form>
             </div>
 
             <br/>
