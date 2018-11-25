@@ -15,24 +15,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-fit=no"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-        <!-- Custom CSS -->
-        <link href="bootstrap/css/theme.css" rel="stylesheet"/>
-        <!-- Font Awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
-        <!-- Google Fonts -->   
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic,700italic|Montserrat:400,700" 
-              rel="stylesheet" type="text/css"/>
+        <!-- chamando estilo da imagem dog -->
+        <link rel="stylesheet" href="css/estilos.css" />
+
         <!-- icone na parte superior -->
         <link rel="shortcut icon" href="img/patinhas.png" type="image/x-icon" />
-        <!-- utilizando Bootstrap na barra de menu -->
+
+        <!-- utilizando Bootstrap na barra de menu-->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-        
-         <!--  body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif} -->
+        <link href="estilos.css" rel="stylesheet" />
+
+        <!--  estilo das letras e fundo -->
         <style>
-         
+            body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
             .menu {display: none}
             .bgimg {
                 background-repeat: no-repeat;
@@ -40,7 +35,6 @@
                 background-image: url("img/fundo1.jpg");
                 background-attachment: fixed;
                 background-position: right;
-                background-clip: padding-box;
 
                 min-height: 100%;
             }
@@ -54,37 +48,64 @@
     </h:head>
 
     <h:body class="bgimg">
-    
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <!-- barra Navegacao -->
-
-        <nav class="navbar navbar-custom navbar affix-to" role="navigation">
+        <!-- Barra navegação -->
+        <nav class="navbar navbar-default navbar-fixed-top fonteSansHelvetica " >
             <div class="container">
+
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" 
-                            data-target=".navbar-main-collapse">
-                        <i class="fa fa-bars"></i>
+                    <button type="button" class="navbar-toggle collapsed" 
+                            data-toggle="collapse" data-target="#barra-navegacao">
+                        <span class="sr-only">Alternar Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand page-scroll" href="index.xhtml">
-                        PetLove </a>
+
+
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+
+                <div class="collapse navbar-collapse" id="barra-navegacao">
+
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="index.xhtml">Página Inicial</a></li>
+                        <li><a href="cardapio.xhtml">Conceito</a></li>
                         <li><a href="curiosidades.xhtml">Curiosidades</a></li>
                         <li><a href="sobre.xhtml">Quem somos</a></li>
                         <li><a href="conta2.xhtml">Cadastre-se</a></li>
+
+                        <h:panelGroup rendered="#{loginController.temAcesso('pessoa')}">  
+                            <li class="dropdown"> 
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Cadastrar Produtos <span class="caret"></span>
+                                </a> 
+                                <ul class="dropdown-menu">
+                                    <li> <a href="cadVacina.xhtml">Produtos</a> </li>
+                                    <li> <a href="zingredientes.xhtml">Ingredientes</a> </li>
+                                    <li> <a href="tipo.xhtml">Tipo</a> </li>
+                                </ul>
+                            </li>	
+                        </h:panelGroup>
+
+
+                        <h:panelGroup rendered="#{loginController.temAcesso('pessoa')}">  
+                            <li class="dropdown"> 
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Visualizar Pedidos <span class="caret"></span>
+                                </a> 
+                                <ul class="dropdown-menu">
+                                    <li> <a href="zallpedidos.xhtml">Histórico de Pedidos</a> </li>
+                                    <li> <a href="znewpedidos.xhtml">Novos Pedidos</a> </li>
+
+                                </ul>
+                            </li>	
+                        </h:panelGroup>
 
                         <li class="dropdown"> 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 Minha Conta <span class="caret"></span>
                             </a> 
                             <ul class="dropdown-menu">
-                              <!--  <li> <a href="login.xhtml">Entrar</a> </li> -->
+                                <li> <a href="login.xhtml">Entrar</a> </li>
                                 <li> <a href="pedido.xhtml">Cartão Virtual</a> </li>
                                 <li> <a href="cadVacina.xhtml">Vacinas</a> </li>
                                 <li> <a href="animal.xhtml">Meus Pets</a> </li>
@@ -101,14 +122,23 @@
 
                         </li>
 
+
+
                     </ul>
 
+
+
                 </div>
+
+
+
             </div>
 
         </nav> <!--Barra navegação FIM -->
 
+
         <br/>
+
 
         <div class="container">
             <ui:insert name="conteudo">

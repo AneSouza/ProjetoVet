@@ -29,7 +29,7 @@ public class Animal {
     private List<Vacina> ling = new LinkedList<Vacina>();
 
     @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date nasc;
+    private java.util.Date nascAni;
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -100,11 +100,11 @@ public class Animal {
     }
 
     public java.util.Date getNasc() {
-        return nasc;
+        return nascAni;
     }
 
-    public void setNasc(java.util.Date nasc) {
-        this.nasc = nasc;
+    public void setNasc(java.util.Date nascAni) {
+        this.nascAni = nascAni;
     }
 
 }

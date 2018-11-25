@@ -6,22 +6,31 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 import br.edu.ifsuldeminas.dao.DAO;
+
 import br.edu.ifsuldeminas.dao.VacinaDAO;
+import br.edu.ifsuldeminas.modelo.Ingredientes;
+
 import br.edu.ifsuldeminas.modelo.Vacina;
 import br.edu.ifsuldeminas.modelo.Tipo;
 
 @ManagedBean
 @ViewScoped
+
 public class vacinaController {
 
     private Vacina vacina = new Vacina();
     private Integer tipoId;
     private Integer ingId;
 
-
-
-/////////////////////////////////// getset private VERIFI
+//	public List<Ingredientes> getIngredientes(){
+//		return vacina.getLing();
+//	}
+//	
+//	public void remover(Ingredientes i){
+//		this.vacina.getLing().remove(i);
+//	}
     public Integer getIngId() {
         return ingId;
     }
@@ -38,7 +47,6 @@ public class vacinaController {
         this.tipoId = tipoId;
     }
 
-/////////////////////////////////// getset private classe obj
     public void setVacina(Vacina vacina) {
         this.vacina = vacina;
     }
@@ -47,15 +55,18 @@ public class vacinaController {
         return vacina;
     }
 
-
-/////////////////////////////////// carregar vacina
+//	public void gravarIngrediente(){
+//		Ingredientes i = new DAO<Ingredientes>(Ingredientes.class).listaPorId(ingId);
+//		vacina.addIngredientes(i);
+//		ingId = null;
+//		
+//	}
     public void carregar(Vacina p) {
         this.tipoId = p.getTipo().getId();
         p = new VacinaDAO().listaPorId(p);
         vacina = p;
     }
 
-/////////////////////////////////// gravar vacina
     public void gravar() {
         Tipo t = new DAO<Tipo>(Tipo.class).listaPorId(this.tipoId);
         vacina.setTipo(t);
@@ -69,32 +80,40 @@ public class vacinaController {
         System.out.println("Gravando Vacina " + vacina.getNome());
     }
 
-/////////////////////////////////// listar vacina
     public List<Vacina> getTodasVacinas() {
         return new DAO<Vacina>(Vacina.class).listaTodos();
     }
 
-/////////////////////////////////// listar tipos vacina
     public List<Tipo> getTodosTipos() {
         return new DAO<Tipo>(Tipo.class).listaTodos();
     }
 
-/////////////////////////////////// remover vacina
-    public void remover(Vacina vacina) {
+    public void remover(Vacina p) {
         try {
 
-            new DAO<Vacina>(Vacina.class).remove(vacina.getId());
+            new DAO<Vacina>(Vacina.class).remove(p.getId());
 
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage("animal", new FacesMessage("Impossivel remover: A vacina consta em algum registro de animal"));
         }
     }
- 
-/////////////////////////////////// atualiza vacina   
-    public void atualizaVacina(Vacina vacina) {
-        this.vacina = vacina;
 
-    }
-
-
+//        //
+//	public List<Ingredientes>getIngredientesProduto(){
+//		return vacina.getLing();
+//	}
+//	
+//	public List<Ingredientes> getTodosIngredientes(){
+//		return new DAO<Ingredientes>(Ingredientes.class).listaTodos();
+//	}
+//	
+//	public List<Vacina> getTodasPizzas(){
+//		return new VacinaDAO().listaPizza();
+//	}
+//	
+//	public List<Vacina> getTodosRefri(){
+//		return new VacinaDAO().listaRefri();
+//	}
+//        
+    //
 }

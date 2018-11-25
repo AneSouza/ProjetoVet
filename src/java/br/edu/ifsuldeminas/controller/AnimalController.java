@@ -6,48 +6,52 @@ import javax.faces.bean.ViewScoped;
 import br.edu.ifsuldeminas.dao.DAO;
 import br.edu.ifsuldeminas.modelo.Animal;
 
+
+
 @ManagedBean
 @ViewScoped
 public class AnimalController {
-
-    private Animal end = new Animal();
-
-////////////////////////inserir - atualiza animal	
-    public void inserir(Animal END) {
-
-        if (END.getId() == null) {
-            new DAO<Animal>(Animal.class).adiciona(END);
-        } else {
-            new DAO<Animal>(Animal.class).atualiza(END);
-        }
-        this.end = new Animal();
-    }
-
-    	
-////////////////////////lista todos animal
-    public List<Animal> getTodosAnimais() {
-        return new DAO<Animal>(Animal.class).listaTodos();
-    }
+	private Animal end = new Animal();
 	
-////////////////////////iremove animal
-    public void remover(Animal p) {
-        new DAO<Animal>(Animal.class).remove(p.getId());
-    }
-
-    	
-////////////////////////carrega animal
-    public void carregar(Animal p) {
-        this.end = p;
-
-    }
 	
-////////////////////////get e set End objeto
-    public Animal getEnd() {
-        return end;
-    }
+	public void inserir(Animal END){
+	
+		if(END.getId() == null){
+			new DAO<Animal>(Animal.class).adiciona(END);
+		}
+		else{
+			new DAO<Animal>(Animal.class).atualiza(END);
+		}
+		this.end = new Animal();
+	}
+	
+	public List<Animal> getTodosAnimais(){
+		return new DAO<Animal>(Animal.class).listaTodos();
+	}
+	
+	public void remover(Animal p){
+		new DAO<Animal>(Animal.class).remove(p.getId());
+	}
+	
+	public void carregar(Animal p){
+		this.end = p;
+		
+	}
 
-    public void setEnd(Animal end) {
-        this.end = end;
-    }
+
+	public Animal getEnd() {
+		return end;
+	}
+
+
+
+	public void setEnd(Animal end) {
+		this.end = end;
+	}
+
+
 
 }
+
+
+

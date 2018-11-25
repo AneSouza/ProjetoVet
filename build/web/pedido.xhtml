@@ -7,11 +7,12 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    >
 
     <ui:composition template="_template2.xhtml">
 
         <ui:define name="titulo">
-            <title>Clínica Veterinária - Cartão Virtual</title>
+            <title>Clínica Veterinária</title>
         </ui:define>
 
         <ui:define name="conteudo">
@@ -25,141 +26,156 @@
                 <div class="form-group" style="padding: 20px; background-color: #008B8B">
                     <h:form >
 
-                        <div class="col-sm-10" > <div class="page-header"></div>  <!-- Traço -->
-                            <font color="#fff">
-                                <h2> Cartão Virtual </h2>
+                        <div > 
+                            <h2> <font color="#fff">Cartão Virtual</font> </h2>
 
-                                <div class="col-sm-4" >
-                                    <h:outputText value="Selecione o nome do animal" for="nomeAnim" />
-                                    <h:selectOneMenu id="nomeAnim" class="form-control" 
-                                                     value="#{pedidoController.pedido.nomeAnim}">
-                                        <f:selectItem itemLabel="Selecionar nome animal" noSelectionOption="true"/>
-                                        <f:selectItems value="#{pessoaController.todosAnimais}" var="end" 
-                                                       itemLabel="#{end.nomeAni} - #{end.peso}" 
-                                                       itemValue="#{end.nomeAni}"
-                                                       pt:required="" />
+                            <h:outputText value="Data" for="data" />
+                            <h:outputText id="data" class="form-control" value="#{pedidoController.pedido.data.time}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+                            </h:outputText>
 
-                                    </h:selectOneMenu>
+                            <br/>
 
-                                </div>
+                            <h:outputText value="Selecione o nome do animal" for="end" />
+                            <h:selectOneMenu id="end" class="form-control" value="#{pedidoController.endId}">
+                                <f:selectItem itemLabel="Selecionar" noSelectionOption="true"/>
+                                <f:selectItems value="#{pedidoController.todosAnimais}" var="end"
+                                               itemValue="#{end.id}"
+                                               pt:required="" />
+                            </h:selectOneMenu>
 
-                                <div class="col-sm-4" >
-                                    <h:outputText value="Vacinas" for="vacina" />
-                                    <h:selectOneMenu class="form-control" id="nomeVac" 
-                                                     value="#{pedidoController.pedido.nomeVac}">
-                                        <f:selectItem itemLabel="Selecionar vacina" noSelectionOption="true"/>
-                                        <f:selectItems value="#{vacinaController.todasVacinas}" var="vacina" 
-                                                       itemLabel="#{vacina.nome} - #{vacina.dose} - 
-                                                       #{vacina.descricao}" 
-                                                       itemValue="#{vacina.nome}"
-                                                       pt:required="" />
-                                    </h:selectOneMenu>
-                                </div>
+                            <div class="page-header"></div>  <!-- Traço -->
 
-                                <div class="col-sm-4" >
-                                    <h:outputText value="Vacina-Dose" for="dose" />
-                                    <h:selectOneMenu class="form-control" id="doseVac" 
-                                                     value="#{pedidoController.pedido.doseVac}">
-                                        <f:selectItem itemLabel="Selecionar dose" noSelectionOption="true"/>
-                                        <f:selectItems value="#{vacinaController.todasVacinas}" var="vacina" 
-                                                       itemLabel="#{vacina.nome} - #{vacina.dose}" 
-                                                       itemValue="#{vacina.dose}"
-                                                       pt:required="" />
-                                    </h:selectOneMenu>
-                                </div>
+                            <h2> <font color="#fff">Vacinas</font> </h2>
 
-                            </font>
-                        </div>
-
-
-                        <font color ="#FFF">
-
-                            <div class="form-group"> <br/>
-
-                                <div class="col-sm-4">
-                                    <br></br><br></br><br></br>
-
-                                    <h:outputText value="Observações" for="obs" />
-                                    <h:inputText id="obs" class="form-control" 
-                                                 value="#{pedidoController.pedido.obs}" />
-                                    <br></br><br></br></div>
-                                <h:commandButton type="submit" class="btn btn-success btn-block" 
-                                                 value="Gravar Dados" action="#{pedidoController.gravarCartao()}" />
-
+                            <div class="col-sm-6" >
+                                <h:outputText value="Vacinas" for="vacina" />
+                                <h:selectOneMenu class="form-control" id="vacina" value="#{pedidoController.vacinaId}">
+                                    <f:selectItem itemLabel="Selecionar" noSelectionOption="true"/>
+                                    <f:selectItems value="#{vacinaController.todasVacinas}" var="vacina" itemLabel="#{vacina.nome} - #{vacina.dose} - R$#{vacina.descricao}0" itemValue="#{vacina.id}"
+                                                   pt:required="" />
+                                </h:selectOneMenu>
                             </div>
-                        </font>
+
+
+
+                          <!--  <div class="col-sm-6" >
+                                <h:outputText value="Quantidade" for="qtde" />
+                                <h:inputText id="qtde" class="form-control" value="{pedidoController.qtde}" 
+                                             pt:type="number" pt:min="0" pt:max="25" pt:step="1" pt:required=""/>
+                            </div> 
+
+                            <br/><br/><br/>
+                            <h:commandButton type="submit" class="btn btn-warning btn-block" value="Gravar Item" action="{pedidoController.gravarItem}"/>
+                         -->	
+                        </div>
+                    </h:form>
+
+                    <div class="page-header"></div>  <!-- Traço -->
+                    
+                    <h:form>
+                        <div class="form-group"> 
+
+                         <!--   <h2> <font color="#fff">Carrinho:</font> </h2> -->
+
+                            <h:dataTable style="background-color: #008B8B" class="table table-striped" 
+                                         value="#{pedidoController.itensDoPedido}" var="produto">
+
+                                <h:column>
+                                    <f:facet name="header">Nome</f:facet>
+                                    <h:outputText value="#{vacina.vacina.nome}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Dose</f:facet>
+                                    <h:outputText value="#{vacina.dose}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Descrição</f:facet>
+                                    <h:outputText id="qtde" value="#{vacina.descricao}" />
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Remover</f:facet>
+                                    <h:commandButton type="submit" class="btn btn-danger btn-sm" value="Remover Produto do Carrinho" action="#{pedidoController.removerItem(vacina)}"/>
+                                </h:column>
+                            </h:dataTable>
+
+                           <!-- <div class="input-group">
+                                <span class="input-group-addon">Valor no Carrinho: R$</span>
+                                <h:outputText id="total" class="form-control" value="{pedidoController.pedido.valorTotal}0"/>
+                            </div> -->
+
+                            <br/>
+                            
+                            <br/>
+                            <div class="form-group">
+                                <h:outputText value="Observações" for="obs" />
+                                <h:inputText id="obs" class="form-control" value="#{pedidoController.pedido.obs}" />
+                            </div>
+
+                            <br/>
+
+                            <h:commandButton type="submit" class="btn btn-success btn-block" value="Gravar Pedido" action="#{pedidoController.gravar}" />
+
+                        </div>
 
                     </h:form> 
 
-
-
-                </div>
-
-                <div class="col-sm-6" >
-                    <font color ="#FFF">
-                        <h:dataTable  style="background-color: #008B8B" class="table table-bordered" 
-                                      value = "#{pessoaController.user }" var="user">
-
-                            <h:column>
-                                <f:facet name="header">Dono(a) do animal</f:facet>
-                                <h:outputText value="#{user.nome}"/>
-                            </h:column>
-
-                        </h:dataTable> </font>
-
-                </div>
-
-                <div class="col-sm-6" >  
-                    <font color ="#FFF">
-                        <h:dataTable style="background-color: #008B8B" class="table table-bordered" 
-                                     value="#{pessoaController.todosAnimais}" var="end">
-
-
-                            <h:column>
-                                <f:facet name="header">Nome do pet</f:facet>
-                                <h:outputText value="#{end.nomeAni}"/>
-                            </h:column>
-
-                        </h:dataTable>
-
-                    </font>
-
                 </div>
 
 
-                <form action="phpmailer/phpmailer_envio.php">
-                    <font color ="#FFF">
-                        <div class="pager"></div>  <!-- Formulario vacinas cadastradas -->
+                <div class="page-header"></div>  <!-- Traço -->
 
-                        <font color="#fff"><h2 style="background-color: #008B8B; text-align: center">Dados cartão</h2></font>
-                        <h:dataTable style="background-color: #008B8B" class="table table-bordered" 
-                                     value="#{pedidoController.todosPedidos}" var="pedido">
 
-                            <h:column>
-                                <f:facet name="header">Nome do Animal</f:facet>
-                                <h:outputText value="#{pedido.nomeAnim}"/>
-                            </h:column>
+                <h2 style="background-color: #008B8B; text-align: center"> <font color ="#fff"> Meus Pedidos:</font></h2>
 
-                            <h:column>
-                                <f:facet name="header">Vacinas aplicadas</f:facet>
-                                <h:outputText value="#{pedido.nomeVac}"/>
-                            </h:column>
+                <div class="row">
+                    <div class="col">
+                        <h:form>
+                            <h:dataTable style="background-color: #008B8B" class="table table-striped" value="#{pedidoController.meusPedidos}" var="pedido">
 
-                            <h:column>
-                                <f:facet name="header">Dose </f:facet>
-                                <h:outputText value="#{pedido.doseVac}"/>
-                            </h:column>
+                                <h:column>
+                                    <f:facet name="header">Nome do Animal</f:facet>
+                                    <h:outputText value="#{pedido.end.nomeAni}"/>
+                                </h:column>
 
-                            <h:column>
-                                <f:facet name="header">Observações</f:facet>
-                                <h:outputText value="#{pedido.obs}"/>
-                            </h:column>
 
-                        </h:dataTable>
+                                <h:column>
+                                    <f:facet name="header">Raca</f:facet>
+                                    <h:outputText value="#{pedido.end.raca}"/>
+                                </h:column>
 
-                    </font>
-                    <button type="submit" formmethod="POST">Enviar cartão para meu e-mail</button>
-                </form>
+
+                                <h:column>
+                                    <f:facet name="header">Sexo</f:facet>
+                                    <h:outputText value="#{pedido.end.sexo}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Peso</f:facet>
+                                    <h:outputText value="#{pedido.end.peso}"/>
+                                </h:column>
+
+
+                                <h:column>
+                                    <f:facet name="header">Data/Hora</f:facet>
+                                    <h:outputText value="#{pedido.data.time}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+                                    </h:outputText>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Valor (R$)</f:facet>
+                                    <h:outputText value="#{pedido.valor}0"/>
+                                </h:column>
+
+
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                </div>
             </div>
 
             <br/>

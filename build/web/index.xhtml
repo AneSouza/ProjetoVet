@@ -11,61 +11,62 @@
     <head>
 
         <title>Clínica Veterinária</title>
-        <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-        <!-- Custom CSS -->
-        <link href="bootstrap/css/theme.css" rel="stylesheet"/>
-        <!-- Font Awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
-        <!-- Google Fonts -->   
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic,700italic|Montserrat:400,700" 
-              rel="stylesheet" type="text/css"/>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-fit=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <!-- chamando estilo da imagem dog -->
+        <link rel="stylesheet" href="css/estilos.css" />
+
         <!-- icone na parte superior -->
         <link rel="shortcut icon" href="img/patinhas.png" type="image/x-icon" />
-        <!-- utilizando Bootstrap na barra de menu -->
+
+        <!-- utilizando Bootstrap na barra de menu-->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
+        <!-- estilo da imagem e cabeçalho -->
         <style>
 
             .bgimg {
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-image: url("img/logo2.jpg");
-                min-height: 90%;
+                min-height: 80%;
             }
 
             .alerta2 {
                 list-style-type: none;
-                margin-top: 60px;
+                margin-top: 55px;
             }
         </style>
 
     </head>
 
-    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <body>
 
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <!-- barra Navegacao -->
 
-        <nav class="navbar navbar-custom navbar affix-to" role="navigation">
+        <!-- Barra navegação -->
+        <nav class="navbar navbar-default navbar affix-top">
             <div class="container">
+
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" 
-                            data-target=".navbar-main-collapse">
-                        <i class="fa fa-bars"></i>
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#barra-navegacao">
+                        <span class="sr-only">Alternar Menu</span> <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand page-scroll" href="index.xhtml">
-                        PetLove </a>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+
+                <div class="collapse navbar-collapse" id="barra-navegacao">
+
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="index.xhtml">Página Inicial</a></li>
+                        <li><a href="cardapio.xhtml">Conceito</a></li>
                         <li><a href="curiosidades.xhtml">Curiosidades</a></li>
                         <li><a href="sobre.xhtml">Quem somos</a></li>
                         <li><a href="conta2.xhtml">Cadastre-se</a></li>
@@ -122,7 +123,28 @@
 
                         <!--fim modal login -->
 
+                        <h:panelGroup rendered="#{loginController.temAcesso('pessoa')}">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                                    data-toggle="dropdown"> Cadastrar Produtos <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="cadVacina.xhtml">Produtos</a></li>
+                                    <li><a href="zingredientes.xhtml">Ingredientes</a></li>
+                                    <li><a href="tipo.xhtml">Tipo</a></li>
+                                </ul></li>
+                        </h:panelGroup>
 
+
+                        <h:panelGroup rendered="#{loginController.temAcesso('pessoa')}">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                                    data-toggle="dropdown"> Visualizar Pedidos <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="zallpedidos.xhtml">Histórico de Pedidos</a></li>
+                                    <li><a href="znewpedidos.xhtml">Novos Pedidos</a></li>
+
+                                </ul></li>
+                        </h:panelGroup>
 
                     </ul>
                 </div>
@@ -140,92 +162,59 @@
 
             </div>
         </header>
-        <container>
-            <row>
-                <column col-md="2" align="center">
-                    <!-- texto /Apresentação -->
 
-                    <!--  <column col-md="4">
-                      <p>
-                            <h1>  SEU AMIGO PET EM BOAS MÃOS </h1>
-                            <br> </br>
-                            <p align="center">A Clínica Veterinária Cuidar é referência no atendimento a animais de pequeno porte. </p>
-                            <p align="center">Equipamentos e instalações modernas, aliadas ao alto padrão de higiene, sempre foram a nossa preocupação para seu amigo pet.
-                                <p align="center">Nosso atendimento  vai além do consultório, onde você tem  acesso ao médico veterinário 24 horas por dia através das mídias sociais, assim estamos à sua disposição 24 horas por dia 
-                                </p>   </p> </p>
-                    </column>
-                    <br> </br> <br> </br>-->
+        <!-- texto /Apresentação -->
+        <br> </br>
+        <b:column col-md="4">
+            <p>
+                <h1  align="center" style="font-style: inherit" >  SEU AMIGO PET EM BOAS MÃOS </h1>
+                <br> </br>
+                <p align="center">A Clínica Veterinária Cuidar é referência no atendimento a animais de pequeno porte. </p>
+                <p align="center">Equipamentos e instalações modernas, aliadas ao alto padrão de higiene, sempre foram a nossa preocupação para seu amigo pet.
+                    <p align="center">Nosso atendimento  vai além do consultório, onde você tem  acesso ao médico veterinário 24 horas por dia através das mídias sociais, assim estamos à sua disposição 24 horas por dia 
+                    </p>   </p> </p>
+        </b:column>
+        <br> </br> <br> </br>
 
-                    <div class="col-4 col-6-medium col-12-small">
+        <div class="alert-link">
+            <a href="informacao.xhtml">    
+                <div>
+                    <img src="img/vacina.jpg" />
+                </div>
 
-                        <section>
-                            <a href="informacao.xhtml" class="image featured"><img src="img/patasteste.jpg" alt="" /></a>
-                            <div class="col-12">
-                                <!-- <ul class="actions">
-                                    <li><a href="#" class="button icon fa-file">Tell Me More</a></li>
-                                </ul> -->
-                            </div>
-
-                        </section>
-
-                    </div>
-                </column>
-            </row>
-        </container>
+                <!-- <font color="black" face="Verdana"/> 
+                <p>Saiba mais!</p>-->
+            </a>
+        </div>
 
 
 
+        <!-- config. rodape -->
+        <br></br><br></br>
+        <footer class="rodape">
 
+            <b:container>
+                <b:row>
 
-        <!-- Footer -->
-        <footer>
-
-
-            <container>
-                <row>
-                    <column col-md="2" align="center">
+                    <b:column col-md="2">
                         <h3  align="center" >  DOCUMENTAÇÃO </h3>
                         <p>
-                            <a href="img/ClassDiagCli.jpg" class="btn btn-default">Diagrama
-                                de Classes</a> <a href="img/CasoUsoCli.jpg"
+                            <a href="resources/docs/Classes.jpg" class="btn btn-default">Diagrama
+                                de Classes</a> <a href="resources/docs/CasoDeUso.jpg"
                                               class="btn btn-default">Casos de Uso</a>
-
-                                              <a href="img/ClassDiagCli.jpg" class="btn btn-default">Ver
+                         
+                        
+                            <a href="resources/docs/Banco.png" class="btn btn-default">Ver
                                 Modelo BD</a>
-                        </p>
-                    </column>
+                       </p>
+                    </b:column>
 
-                </row>
+                </b:row>
                 <hr />
-            </container>
-            <ul class="list-inline banner-social-buttons">
-                <li>
-                    <a href="https://twitter.com/wowthemesnet" class="btn btnghost btn-lg"><i class="fa fa-twitter fa-fw"></i><span class="network-name">Twitter</span></a>
-                </li>
-                <li>
-                    <a href="https://www.facebook.com/pages/wowthemesnet/562560840468823" class="btn btnghost btn-lg"><i class="fa fa-facebook fa-fw"></i><span class="network-name">Facebook</span></a>
-                </li>
-                <li>
-                    <a href="https://plus.google.com/u/0/b/110916582192388695332/110916582192388695332/posts" class="btn btnghost btn-lg"><i class="fa fa-google-plus fa-fw"></i><span class="network-name">Google+</span></a>
-                </li>
-            </ul> 
-
-            <div class="container text-center">
-                <p class="credits">
-                    Copyright &copy;  VetClínica<br/>
-                </p>
-
-            </div>
+            </b:container>
         </footer>
-        <!-- Footer -->
-        <!-- jQuery -->
-        <script src="js/jquery.js"></script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- Plugin JavaScript -->
-        <script src="js/jquery.easing.min.js"></script>
-        <!-- Custom Theme JavaScript -->
-        <script src="js/theme.js"></script>
+        <br> </br>
+        <p align="center">© COPYRIGHT-2018 VetClínica</p>
     </body>
 
 </html>
