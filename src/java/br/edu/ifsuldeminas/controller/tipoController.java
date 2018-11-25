@@ -14,29 +14,25 @@ import br.edu.ifsuldeminas.modelo.Tipo;
 @ManagedBean
 @ViewScoped
 public class tipoController {
+	private Tipo t = new Tipo();
+	
+	public Tipo getTipo() {
+		return t;
+	}
 
-    private Tipo t = new Tipo();
-
-    public Tipo getTipo() {
-        return t;
-    }
-
-    public void gravar() {
-        new DAO<Tipo>(Tipo.class).adiciona(t);
-        System.out.println("Gravando Vacina " + t.getTipo());
-    }
-
-    public List<Tipo> getTodosTipos() {
-        return new DAO<Tipo>(Tipo.class).listaTodos();
-    }
-
-    public void remover(Tipo t) {
-        try {
-            new DAO<Tipo>(Tipo.class).remove(t.getId());
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("tipo", new FacesMessage("Impossivel remover: o tipo consta em uma vacina."));
-
-        }
-    }
+	public void gravar(){
+		new DAO<Tipo>(Tipo.class).adiciona(t);
+		System.out.println("Gravando Produto " + t.getTipo());
+	}
+	public List<Tipo> getTodosTipos(){
+		return new DAO<Tipo>(Tipo.class).listaTodos();
+	}
+	public void remover(Tipo t){
+		try{
+		new DAO<Tipo>(Tipo.class).remove(t.getId());
+	}catch(Exception e){
+		FacesContext.getCurrentInstance().addMessage("tipo", new FacesMessage("Imposs�vel remover: o tipo consta em um produto"));
+		
+	}}
 
 }

@@ -49,34 +49,34 @@
                             <h2> <font color="#fff">Vacinas</font> </h2>
 
                             <div class="col-sm-6" >
-                                <h:outputText value="Vacinas" for="vacina" />
-                                <h:selectOneMenu class="form-control" id="vacina" value="#{pedidoController.vacinaId}">
+                                <h:outputText value="Produtos" for="produto" />
+                                <h:selectOneMenu class="form-control" id="produto" value="#{pedidoController.vacinaId}">
                                     <f:selectItem itemLabel="Selecionar" noSelectionOption="true"/>
-                                    <f:selectItems value="#{vacinaController.todasVacinas}" var="vacina" itemLabel="#{vacina.nome} - #{vacina.dose} - R$#{vacina.descricao}0" itemValue="#{vacina.id}"
+                                    <f:selectItems value="#{vacinaController.todasVacinas}" var="produto" itemLabel="#{vacina.nome} - #{vacina.tamanho} - R$#{vacina.valor }0" itemValue="#{vacina.id}"
                                                    pt:required="" />
                                 </h:selectOneMenu>
                             </div>
 
 
 
-                          <!--  <div class="col-sm-6" >
+                            <div class="col-sm-6" >
                                 <h:outputText value="Quantidade" for="qtde" />
-                                <h:inputText id="qtde" class="form-control" value="{pedidoController.qtde}" 
+                                <h:inputText id="qtde" class="form-control" value="#{pedidoController.qtde}" 
                                              pt:type="number" pt:min="0" pt:max="25" pt:step="1" pt:required=""/>
-                            </div> 
+                            </div>	
 
                             <br/><br/><br/>
-                            <h:commandButton type="submit" class="btn btn-warning btn-block" value="Gravar Item" action="{pedidoController.gravarItem}"/>
-                         -->	
+                            <h:commandButton type="submit" class="btn btn-warning btn-block" value="Gravar Item" action="#{pedidoController.gravarItem}"/>
+
                         </div>
                     </h:form>
 
                     <div class="page-header"></div>  <!-- Traço -->
-                    
+
                     <h:form>
                         <div class="form-group"> 
 
-                         <!--   <h2> <font color="#fff">Carrinho:</font> </h2> -->
+                            <h2> <font color="#fff">Carrinho:</font> </h2>
 
                             <h:dataTable style="background-color: #008B8B" class="table table-striped" 
                                          value="#{pedidoController.itensDoPedido}" var="produto">
@@ -102,10 +102,10 @@
                                 </h:column>
                             </h:dataTable>
 
-                           <!-- <div class="input-group">
+                            <div class="input-group">
                                 <span class="input-group-addon">Valor no Carrinho: R$</span>
-                                <h:outputText id="total" class="form-control" value="{pedidoController.pedido.valorTotal}0"/>
-                            </div> -->
+                                <h:outputText id="total" class="form-control" value="#{pedidoController.pedido.valorTotal}0"/>
+                            </div>
 
                             <br/>
                             
@@ -121,7 +121,7 @@
 
                         </div>
 
-                    </h:form> 
+                    </h:form>
 
                 </div>
 

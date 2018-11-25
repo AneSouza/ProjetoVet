@@ -33,7 +33,7 @@ public class loginController {
 			context.getExternalContext().getSessionMap().put("usuariologado", user);
 			context.getExternalContext().getFlash().setKeepMessages(true);
 			context.addMessage(null,new FacesMessage("Seja bem-vindo (a) " + user.getNome()));
-			return "pedido?faces-redirect=true";
+			return "index?faces-redirect=true";
 		}
 		else{
 			context.getExternalContext().getFlash().setKeepMessages(true);

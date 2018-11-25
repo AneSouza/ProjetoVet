@@ -17,22 +17,19 @@
 
         <ui:define name="conteudo">
 
-            <div class="container" >
+            <div class="container">
 
                 <div class="page-header">
-                    
+                    <h1>Inserir Vacina</h1>
                     <h:messages id="msg" class="fonteSansHelvetica alerta alert alert-danger"/>
 
                 </div>
 
 
-                <div class="col-sm-5" style="background-color: #aad450; padding: 20px">
+                <div style="background-color: #aad450; padding: 20px">
                     <h:form>
 
-                        <div class="form-group col-md-6"> 
-                            <h2>Inserir Vacina</h2>
-                            <a href="tipo.xhtml"><h3>Cadastre o Tipo</h3></a>
-
+                        <div class="form-group">         
                             <h:outputText value="Nome" for="nome" />
                             <h:inputText id="nome" class="form-control" value="#{vacinaController.vacina.nome}" 
                                          pt:required="" required="true" requiredMessage="Nome Obrigatorio"/>
@@ -46,8 +43,7 @@
                                          pt:required="" required="true" requiredMessage="Descricao Obrigatorio"/>	
 
                             <h:outputText value="Selecione um tipo" for="tipo"/>
-                            <h:selectOneMenu id="tipo" class="form-control" value="#{vacinaController.tipoId}" required="true" 
-                                             requiredMessage="Tipo Obrigatorio">
+                            <h:selectOneMenu id="tipo" class="form-control" value="#{vacinaController.tipoId}" required="true" requiredMessage="Tipo Obrigatorio">
                                 <f:selectItem itemLabel = "Selecionar" noSelectionOption="true"/>
                                 <f:selectItems value ="#{vacinaController.todosTipos}" var = "tipo" itemLabel="#{tipo.tipo}"
                                                itemValue="#{tipo.id}" pt:required=""/>
@@ -56,35 +52,35 @@
 
                         <br/><br/>
 
-                        <!--   <div style="background-color: #FAFAFA; padding: 20px">
-                             <fieldset>
-                                  <legend>Ingredientes</legend>
-  
-                                  <h:outputText for="ingrediente" />
-                                  <h:selectOneMenu id="ingrediente" class="form-control" value="{vacinaController.ingId}">
-                                      <f:selectItem itemLabel="Selecionar" noSelectionOption="true" />
-                                      <f:selectItems value="{vacinaController.todosIngredientes}" var="ingrediente" itemLabel="{ingrediente.nome}" itemValue="{ingrediente.id}" />
-                                  </h:selectOneMenu>
-  
-                                  <h:commandButton type="submit" class="btn btn-info btn-block" value="Adicionar Ingrediente"  action ="{vacinaController.gravarIngrediente}"/>
-  
-                                  <br/>
-  
-                                  <h:dataTable class="table table-striped" value="{vacinaController.ingredientesProduto}" var = "ingrediente">
-                                      <h:column>
-                                          <f:facet name="header"></f:facet>
-                                          <h:outputText value="{ingrediente.nome}"/>
-                                      </h:column>
-  
-                                      <h:column>
-                                          <f:facet name="header"></f:facet>
-                                          <h:commandButton type="submit" class="btn btn-danger btn-sm" value="Remover Ingrediente" action="{vacinaController.remover(ingrediente)}"/>
-                                      </h:column>
-                                  </h:dataTable>
-  
-                              </fieldset>	 
-  
-                          </div>-->
+                      <!--   <div style="background-color: #FAFAFA; padding: 20px">
+                           <fieldset>
+                                <legend>Ingredientes</legend>
+
+                                <h:outputText for="ingrediente" />
+                                <h:selectOneMenu id="ingrediente" class="form-control" value="{vacinaController.ingId}">
+                                    <f:selectItem itemLabel="Selecionar" noSelectionOption="true" />
+                                    <f:selectItems value="{vacinaController.todosIngredientes}" var="ingrediente" itemLabel="{ingrediente.nome}" itemValue="{ingrediente.id}" />
+                                </h:selectOneMenu>
+
+                                <h:commandButton type="submit" class="btn btn-info btn-block" value="Adicionar Ingrediente"  action ="{vacinaController.gravarIngrediente}"/>
+
+                                <br/>
+
+                                <h:dataTable class="table table-striped" value="{vacinaController.ingredientesProduto}" var = "ingrediente">
+                                    <h:column>
+                                        <f:facet name="header"></f:facet>
+                                        <h:outputText value="{ingrediente.nome}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header"></f:facet>
+                                        <h:commandButton type="submit" class="btn btn-danger btn-sm" value="Remover Ingrediente" action="{vacinaController.remover(ingrediente)}"/>
+                                    </h:column>
+                                </h:dataTable>
+
+                            </fieldset>	 
+
+                        </div>-->
 
                         <br/>
                         <h:commandButton type="submit" class="btn btn-success btn-block" value="Cadastrar Vacina" 
@@ -93,7 +89,7 @@
 
                 </div>
 
-                <div class="pager"></div>  <!-- Traço -->
+                <div class="page-header"></div>  <!-- Traço -->
 
                 <h2 style="background-color: #F2F5A9; text-align: center">Vacinas Cadastradas</h2>
                 <h:form>
@@ -113,7 +109,7 @@
                             <f:facet name="header">Dose </f:facet>
                             <h:outputText value="#{vacina.dose}"/>
                         </h:column>
-
+                        
                         <h:column>
                             <f:facet name="header">Descricao </f:facet>
                             <h:outputText value="#{vacina.descricao}"/>
@@ -123,16 +119,16 @@
                         <h:column>
                             <f:facet name="header">Alterar</f:facet>
                             <h:commandButton type="submit" class="btn btn-success btn-sm" value="Alterar Vacina" 
-                                             action="#{vacinaController.gravar()}">
+                                             action="#{vacinaController.carregar(p)}">
                             </h:commandButton>
                         </h:column>
 
-                        <h:column>
+                      <!--  <h:column>
                             <f:facet name="header">Remover</f:facet>
                             <h:commandButton type="submit" class="btn btn-danger btn-sm" value="Remover Vacina" 
-                                             action="#{vacinaController.remover(p)}">
+                                             action="{vacinaController.}">
                             </h:commandButton>
-                        </h:column>
+                        </h:column>  -->
 
                     </h:dataTable>
                 </h:form>

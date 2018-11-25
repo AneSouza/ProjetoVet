@@ -15,224 +15,239 @@ import br.edu.ifsuldeminas.modelo.Pedido;
 import br.edu.ifsuldeminas.modelo.Pessoa;
 import br.edu.ifsuldeminas.modelo.Vacina;
 
+
 @ManagedBean
 @ViewScoped
 public class pedidoController {
-
-    private Pedido pedido = new Pedido();
-    private Integer qtde;
-    private Integer endId;
-    private Integer vacinaId;
-    private Integer pagId;
-    private List<Carrinho> carrinho;
+	private Pedido pedido = new Pedido();
+	private Integer qtde;
+	private Integer endId;
+	private Integer vacinaId;
+	private Integer pagId;
+	private List<Carrinho> carrinho;
     private boolean render;
-    private String login, senha;
+	private String login , senha;
+	
 
-    public boolean isRender() {
-        return render;
-    }
 
-    public void setRender(boolean render) {
-        this.render = render;
-    }
+	public boolean isRender() {
+		return render;
+	}
 
-    public List<Carrinho> getCarrinho() {
-        return carrinho;
-    }
+	public void setRender(boolean render) {
+		this.render = render;
+	}
 
-    public void setCarrinho(List<Carrinho> carrinho) {
-        this.carrinho = carrinho;
-    }
+	public List<Carrinho> getCarrinho() {
+		return carrinho;
+	}
 
-    public Integer getEndId() {
-        return endId;
-    }
+	public void setCarrinho(List<Carrinho> carrinho) {
+		this.carrinho = carrinho;
+	}
 
-    public void setEndId(Integer endId) {
-        this.endId = endId;
-    }
+	public Integer getEndId() {
+		return endId;
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	public void setEndId(Integer endId) {
+		this.endId = endId;
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    public Pedido getPedido() {
-        return pedido;
-    }
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 
-    public Integer getQtde() {
-        return qtde;
-    }
+	public Pedido getPedido() {
+		return pedido;
+	}
 
-    public void setQtde(Integer qtde) {
-        this.qtde = qtde;
-    }
+	public Integer getQtde() {
+		return qtde;
+	}
+	
+	public void setQtde(Integer qtde) {
+		this.qtde = qtde;
+	}
+	
+	public Integer getVacinaId() {
+		return vacinaId;
+	}
 
-    public Integer getVacinaId() {
-        return vacinaId;
-    }
+	public void setVacinaId(Integer vacinaId) {
+		this.vacinaId = vacinaId;
+	}
 
-    public void setVacinaId(Integer vacinaId) {
-        this.vacinaId = vacinaId;
-    }
+	public List<Vacina> getTodosProdutos(){
+		return new DAO<Vacina>(Vacina.class).listaTodos();
+	}
+	
 
-    public List<Vacina> getTodosProdutos() {
-        return new DAO<Vacina>(Vacina.class).listaTodos();
-    }
+	public void gravarItem(){
+		
+		try {
+			
+		
+			// TODO: handle exception
+		
+		Carrinho carrinho = new Carrinho();
+		
+	   
+		Vacina p = new DAO<Vacina>(Vacina.class).listaPorId(vacinaId);
+		carrinho.setProduto(p);
+		carrinho.setQtde(qtde);
+		carrinho.setValor(p.getValor());
+		carrinho.setPedido(pedido);
+		pedido.add(carrinho);
+	   
+		
+		
+		
+		
+		qtde = null;
+		vacinaId = null;
+	} catch (Exception e) {
+		FacesContext.getCurrentInstance().addMessage("pedido", new FacesMessage("Selecione uma Vacina!"));
+		
+	}}
+	
+	public List<Carrinho> getItensDoPedido() {
+		return pedido.getCarrinho();
+	}
+	
+	public List<Carrinho> getItensDoPedido(Pedido p) {
+		for (Carrinho pro : p.getCarrinho()) {
+			System.out.println("\n\n\n>>>>>" + pro.getProduto().getNome() + "<<<<<\n");
+		}
+		return p.getCarrinho();
+	}
+	public void removerItem(Carrinho item){
+		pedido.getCarrinho().remove(item);
+		
+	}
+	
+	public void gravar(){
+		try {
+			
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		Pessoa cliente = (Pessoa)context.getExternalContext().getSessionMap().get("usuariologado");
+		System.out.println("\n\n >>>>>>>>>>>" + this.endId + "<<<<<<<<<<<<<<\n\n");
+		Animal end = new DAO<Animal>(Animal.class).listaPorId(endId);
+  
+        
+		pedido.setPessoa(cliente);
+		pedido.setStatus(true);
+		pedido.setEnd(end);
+        cliente.getPeds().add(pedido);
+		
+		
+		if (this.pedido.getId() == null) {
+			new DAO<Pedido>(Pedido.class).adiciona(pedido);
+		} else {
+			new DAO<Pedido>(Pedido.class).atualiza(pedido);
+		}
+		
+		this.pedido = new Pedido();
+		this.endId = null;
+		
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage("pedido", new FacesMessage("Selecione um Animal!"));
+			
+		}
+	}
+	
+	private void atualiza() {
+		List<Carrinho> listaItens =  new CarrinhoDAO().listaPorPedido(pedido);
+		DAO<Carrinho> d = new DAO<Carrinho>(Carrinho.class);
+		
+		for (Carrinho i : listaItens){
+			d.remove(i.getId());
+		}
+		new DAO<Pedido>(Pedido.class).atualiza(pedido);
+		
+	}
 
-//    public void gravarItem() {
-//
-//        try {
-//
-//            // TODO: handle exception
-//            Carrinho carrinho = new Carrinho();
-//
-//            Vacina p = new DAO<Vacina>(Vacina.class).listaPorId(vacinaId);
-//            carrinho.setProduto(p);
-//            carrinho.setQtde(qtde);
-//            carrinho.setValor(p.getValor());
-//            carrinho.setPedido(pedido);
-//            pedido.add(carrinho);
-//
-//            qtde = null;
-//            vacinaId = null;
-//        } catch (Exception e) {
-//            FacesContext.getCurrentInstance().addMessage("pedido", new FacesMessage("Selecione uma Vacina!"));
-//
-//        }
-//    }
+	public List<Pedido> getTodosPedidos(){
+		return new DAO<Pedido>(Pedido.class).listaTodos();
+	}
+	
+	public void remover(Pedido c){
+		new DAO<Pedido>(Pedido.class).remove(c.getId());
+	}
+	
+	public void carregar(Pedido c){
+		c =  new PedidoDAO().listaPorId(c);
+		pedido = c;
+		
+	}
+	
+	
+	public List<Animal> getTodosAnimais(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		Pessoa p = (Pessoa)context.getExternalContext().getSessionMap().get("usuariologado");
 
-    public List<Carrinho> getItensDoPedido() {
-        return pedido.getCarrinho();
-    }
-
-    public List<Carrinho> getItensDoPedido(Pedido p) {
-        for (Carrinho pro : p.getCarrinho()) {
-            System.out.println("\n\n\n>>>>>" + pro.getProduto().getNome() + "<<<<<\n");
-        }
-        return p.getCarrinho();
-    }
-
-    public void removerItem(Carrinho item) {
-        pedido.getCarrinho().remove(item);
-
-    }
-
-    public void gravar() {
-        try {
-
-            FacesContext context = FacesContext.getCurrentInstance();
-            Pessoa cliente = (Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
-            System.out.println("\n\n >>>>>>>>>>>" + this.endId + "<<<<<<<<<<<<<<\n\n");
-            Animal end = new DAO<Animal>(Animal.class).listaPorId(endId);
-
-            pedido.setPessoa(cliente);
-            pedido.setStatus(true);
-            pedido.setEnd(end);
-            cliente.getPeds().add(pedido);
-
-            if (this.pedido.getId() == null) {
-                new DAO<Pedido>(Pedido.class).adiciona(pedido);
-            } else {
-                new DAO<Pedido>(Pedido.class).atualiza(pedido);
-            }
-
-            this.pedido = new Pedido();
-            this.endId = null;
-
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("pedido", new FacesMessage("Selecione um Animal!"));
-
-        }
-    }
-
-    private void atualiza() {
-        List<Carrinho> listaItens = new CarrinhoDAO().listaPorPedido(pedido);
-        DAO<Carrinho> d = new DAO<Carrinho>(Carrinho.class);
-
-        for (Carrinho i : listaItens) {
-            d.remove(i.getId());
-        }
-        new DAO<Pedido>(Pedido.class).atualiza(pedido);
-
-    }
-
-    public List<Pedido> getTodosPedidos() {
-        return new DAO<Pedido>(Pedido.class).listaTodos();
-    }
-
-    public void remover(Pedido c) {
-        new DAO<Pedido>(Pedido.class).remove(c.getId());
-    }
-
-    public void carregar(Pedido c) {
-        c = new PedidoDAO().listaPorId(c);
-        pedido = c;
-
-    }
-
-    public List<Animal> getTodosAnimais() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Pessoa p = (Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
-
+		
         return p.getEnds();
-
-    }
-
-    public List<Pedido> getPedidosAtivos() {
-
-        List<Pedido> peds = new PedidoDAO().pedidosativos();
-
-        return peds;
-
-    }
-
-    public void finalizar(Pedido p) {
-        p.setStatus(false);
-        new DAO<Pedido>(Pedido.class).atualiza(p);
-
-    }
-
-    public void exibir(Pedido p) {
-        for (Carrinho car : p.getCarrinho()) {
-            System.out.println("\n\n>>>" + car.getProduto().getNome() + car.getQtde());
-
-        }
-
-        this.carrinho = p.getCarrinho();
-        this.render = true;
-
-    }
-
-    public List<Pedido> getMeusPedidos() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Pessoa p = (Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
-        return p.getPeds();
-
-    }
-
-    public boolean mostrarItens() {
-        return this.render;
-    }
-
-    public List<Carrinho> getItensdoPedido() {
-        return this.carrinho;
-    }
+		
+	}
+	
+	public List<Pedido> getPedidosAtivos(){
+		
+		List<Pedido> peds = new PedidoDAO().pedidosativos();
+		
+		return peds;
+		
+	}
+	
+	public void finalizar(Pedido p){
+		p.setStatus(false);
+		new DAO<Pedido>(Pedido.class).atualiza(p);
+		
+	}
+	
+	public void exibir(Pedido p){
+		for (Carrinho car : p.getCarrinho()) {
+			System.out.println("\n\n>>>" + car.getProduto().getNome()  + car.getQtde());
+			
+		}
+		
+		this.carrinho = p.getCarrinho();
+		this.render = true;
+	
+	}
+	
+	public List<Pedido> getMeusPedidos(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		Pessoa p = (Pessoa)context.getExternalContext().getSessionMap().get("usuariologado");
+		return p.getPeds();
+		
+		
+	}
+	
+	public boolean mostrarItens(){
+		return this.render;
+	}
+	
+	
+	public List<Carrinho> getItensdoPedido(){
+		return this.carrinho;
+	}
 
 }
