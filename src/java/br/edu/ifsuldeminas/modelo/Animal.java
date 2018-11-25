@@ -1,10 +1,13 @@
 package br.edu.ifsuldeminas.modelo;
 
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,9 +24,12 @@ public class Animal {
 
     @OneToOne
     private Pessoa pessoa;
+    
+    @ManyToMany
+    private List<Vacina> ling = new LinkedList<Vacina>();
 
     @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date nascAni;
+    private java.util.Date nasc;
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -94,11 +100,11 @@ public class Animal {
     }
 
     public java.util.Date getNasc() {
-        return nascAni;
+        return nasc;
     }
 
-    public void setNasc(java.util.Date nascAni) {
-        this.nascAni = nascAni;
+    public void setNasc(java.util.Date nasc) {
+        this.nasc = nasc;
     }
 
 }

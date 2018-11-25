@@ -25,154 +25,149 @@
                 </div>
 
                 <h:form>
+                    <font color ="#FFF">
+                        <div class="col-sm-5" style="padding: 20px; background-color: #008B8B">
 
-                    <div class="col-sm-5" style="padding: 20px; background-color: #008B8B">
 
-                        <font color="#fff"><h2 align="center">Cadastre seu Pet</h2></font>
+                            <h2 align="center">Cadastre seu Pet</h2>
 
-                        <div class="form-group col-md-6">
-                            <h:outputLabel value="Nome do Animal" for="nomeAni"/>
-                            <h:inputText id="nomeAni"  class="form-control" value="#{pessoaController.end.nomeAni}"
-                                         pt:required=""  
-                                         required="true" requiredMessage="Nome animal obrigatório.">
-                                <f:ajax event="blur" render="msg-formulario"/>
-                            </h:inputText>
-                        </div>
+                            <div class="form-group col-md-6">
+                                <h:outputLabel value="Nome do Animal" for="nomeAni"/>
+                                <h:inputText id="nomeAni"  class="form-control" value="#{pessoaController.end.nomeAni}"
+                                             pt:required=""  
+                                             required="true" requiredMessage="Nome animal obrigatório.">
+                                    <f:ajax event="blur" render="msg-formulario"/>
+                                </h:inputText>
+                            </div>
 
-                        <div class="form-group col-md-6">
-                            <h:outputLabel value="Raça" for="raca"/>
-                            <h:inputText id="raca"  class="form-control" value="#{pessoaController.end.raca}"
-                                         pt:required=""  
-                                         required="true" requiredMessage="Raça obrigatória.">
-                                <f:ajax event="blur" render="msg-formulario"/>   
-                            </h:inputText>
+                            <div class="form-group col-md-6">
+                                <h:outputLabel value="Raça" for="raca"/>
+                                <h:inputText id="raca"  class="form-control" value="#{pessoaController.end.raca}"
+                                             pt:required=""  
+                                             required="true" requiredMessage="Raça obrigatória.">
+                                    <f:ajax event="blur" render="msg-formulario"/>   
+                                </h:inputText>
 
-                        </div>
+                            </div>
 
-                        <div class="form-group col-md-6">
-                            <h:outputLabel value="Sexo" for="sexo"/>
-                            <h:inputText id="sexo"  class="form-control" value="#{pessoaController.end.sexo}"
-                                         pt:required=""
-                                         required="true" requiredMessage="Sexo obrigatório.">
-                                <f:ajax event="blur" render="msg-formulario"/>
-                            </h:inputText>
+                            <div class="form-group col-md-6">
+                                <h:outputLabel value="Sexo" for="sexo"/>
+                                <h:inputText id="sexo"  class="form-control" value="#{pessoaController.end.sexo}"
+                                             pt:required=""
+                                             required="true" requiredMessage="Sexo obrigatório.">
+                                    <f:ajax event="blur" render="msg-formulario"/>
+                                </h:inputText>
+                            </div> 
+
+
+
+                            <div class="form-group col-md-6">
+                                <h:outputLabel value="Data de Nascimento" for="nascAni"/>
+                                <h:inputText id="dtNascimento" class="form-control" 
+                                             value="#{pessoaController.end.nasc}"
+                                             required="true" requiredMessage="Data de nascimento obrigatório.">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                                    <f:ajax event="blur" render="msg-formulario"/> 
+                                </h:inputText>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <h:outputLabel value="Peso" for="peso"/>
+                                <h:inputText id="peso"  class="form-control" value="#{pessoaController.end.peso}"
+                                             pt:required="" 
+                                             required="true" requiredMessage="Peso obrigatório.">
+                                    <f:ajax event="blur" render="msg-formulario"/> 
+                                </h:inputText>
+                            </div>
+
+
+
+
+                            <div class="form-group col-md-6">
+                                <h:outputLabel value="Cidade" for="cidade"/>
+                                <h:inputText id="cidade"  class="form-control" value="#{pessoaController.end.cidade}"
+                                             pt:placeholder="Ex.: Alterosa" pt:required=""
+                                             required="true" requiredMessage="Cidade obrigatória.">
+
+                                    <f:ajax event="blur" render="msg-formulario"/> 
+                                </h:inputText>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <h:outputLabel value="Estado" for="estado"/>
+                                <h:inputText id="estado"  class="form-control" value="#{pessoaController.end.estado}"
+                                             pt:placeholder="Ex.: Minas Gerais" pt:required=""
+                                             required="true" requiredMessage="Estado obrigatório.">
+                                    <f:ajax event="blur" render="msg-formulario"/> 
+                                </h:inputText>
+                            </div>
+
+
+                            <h:commandButton type="submit" class="btn btn-success btn-block" value="Cadastrar Animal" 
+                                             action="#{pessoaController.addAnimal}"/>
+
                         </div> 
-
-                        <!--    <div class="form-group col-md-6">
-                                <h:outputLabel value="Telefone" for="telefone"/>
-                                <h:selectOneMenu id="sexo" class="form-control"
-                                                     value="#{animalController.animal.sexo}"
-                                                 required="true" requiredMessage="Sexo obrigatório.">
-                                    <f:selectItem itemLabel="Selecionar" noSelectionOption="true" />
-                                        <f:selectItems value="#{animalController.sexo}" var="sexo" itemLabel="#{sexo.descricao}" itemValue="#{sexo}" />
-                                </h:selectOneMenu>
-                            </div> -->
-
-                        <!--   <h:outputText value="Data de Nascimento" for="nascAni" />
-                               <h:outputText id="data" class="form-control" value="#{pedidoController.pedido.data.time}">
-                                   <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
-                               </h:outputText> -->
-
-                        <div class="form-group col-md-6">
-                            <h:outputLabel value="Data de Nascimento" for="nascAni"/>
-                            <h:inputText id="dtNascimento" class="form-control" 
-                                         value="#{animalController.nascAni.time}"
-                                         required="true" requiredMessage="Data de nascimento obrigatório.">
-                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-                                <f:ajax event="blur" render="msg-formulario"/> 
-                            </h:inputText>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <h:outputLabel value="Peso" for="peso"/>
-                            <h:inputText id="peso"  class="form-control" value="#{pessoaController.end.peso}"
-                                         pt:required="" 
-                                         required="true" requiredMessage="Peso obrigatório.">
-                                <f:ajax event="blur" render="msg-formulario"/> 
-                            </h:inputText>
-                        </div>
-
-
-
-
-                        <div class="form-group col-md-6">
-                            <h:outputLabel value="Cidade" for="cidade"/>
-                            <h:inputText id="cidade"  class="form-control" value="#{pessoaController.end.cidade}"
-                                         pt:placeholder="Ex.: Alterosa" pt:required=""
-                                         required="true" requiredMessage="Cidade obrigatória.">
-
-                                <f:ajax event="blur" render="msg-formulario"/> 
-                            </h:inputText>
-                        </div>
-
-
-                        <div class="form-group col-md-6">
-                            <h:outputLabel value="Estado" for="estado"/>
-                            <h:inputText id="estado"  class="form-control" value="#{pessoaController.end.estado}"
-                                         pt:placeholder="Ex.: Minas Gerais" pt:required=""
-                                         required="true" requiredMessage="Estado obrigatório.">
-                                <f:ajax event="blur" render="msg-formulario"/> 
-                            </h:inputText>
-                        </div>
-
-
-                        <h:commandButton type="submit" class="btn btn-success btn-block" value="Cadastrar Animal" 
-                                         action="#{pessoaController.addAnimal}"/>
-
-                    </div> 
-
+                    </font>
 
                 </h:form>
                 <!--Termina cadastro Pet -->
 
-                <div class="pager"></div>  <!-- Começa ver cadastro pet -->
-
-                <h2 style="background-color: #008B8B; text-align: center">Pets Cadastrados</h2>
 
                 <div class="row">
                     <div class="col">
+
                         <h:form>
+                            <font color="#fff">
+                                <div class="pager"></div>  <!-- Começa ver cadastro pet -->
 
-                            <h:dataTable  style="background-color: #008B8B" class="table table-striped" 
-                                          value = "#{pessoaController.todosAnimais }" var="end">
+                                <h2 style="background-color: #008B8B; text-align: center">Pets Cadastrados</h2>
 
-                                <h:column>
-                                    <f:facet name="header">Nome do Animal</f:facet>
-                                    <h:outputText value="#{end.nomeAni}"/>
-                                </h:column>
+                                <h:dataTable  style="background-color: #008B8B" class="table table-bordered" 
+                                              value = "#{pessoaController.todosAnimais }" var="end">
 
-                                <h:column>
-                                    <f:facet name="header">Raça</f:facet>
-                                    <h:outputText value="#{end.raca}"/>
-                                </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Nome do Animal</f:facet>
+                                        <h:outputText value="#{end.nomeAni}"/>
+                                    </h:column>
 
-                                <h:column>
-                                    <f:facet name="header">Sexo</f:facet>
-                                    <h:outputText value="#{end.sexo}"/>
-                                </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Raça</f:facet>
+                                        <h:outputText value="#{end.raca}"/>
+                                    </h:column>
 
-                                <h:column>
-                                    <f:facet name="header">Cidade</f:facet>
-                                    <h:outputText value="#{end.cidade}"/>
-                                </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Sexo</f:facet>
+                                        <h:outputText value="#{end.sexo}"/>
+                                    </h:column>
 
-                                <h:column>
-                                    <f:facet name="header">Alterar</f:facet>
-                                    <h:commandButton type="submit" class="btn btn-success btn-sm" value="Alterar Animal" 
-                                                     action="#{pessoaController.atualizaAnimal(end)}">
-                                    </h:commandButton>
-                                </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Cidade</f:facet>
+                                        <h:outputText value="#{end.cidade}"/>
+                                    </h:column>
 
-                                <h:column>
-                                    <f:facet name="header">Remover</f:facet>
-                                    <h:commandButton type="submit" class="btn btn-danger btn-sm" value="Remover Animal" 
-                                                     action="#{pessoaController.removeAnimal(end)}">
-                                    </h:commandButton>
-                                </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Nascimento</f:facet>
+                                        <h:outputText value="#{end.nasc}"/>
+                                    </h:column>
 
-                            </h:dataTable>
+                                    <h:column>
+                                        <f:facet name="header">Alterar</f:facet>
+                                        <h:commandButton type="submit" class="btn btn-success btn-sm" value="Alterar Animal" 
+                                                         action="#{pessoaController.atualizaAnimal(end)}">
+                                        </h:commandButton>
+                                    </h:column>
 
+                                    <h:column>
+                                        <f:facet name="header">Remover</f:facet>
+                                        <h:commandButton type="submit" class="btn btn-danger btn-sm" value="Remover Animal" 
+                                                         action="#{pessoaController.removeAnimal(end)}">
+                                        </h:commandButton>
+                                    </h:column>
 
+                                </h:dataTable>
+
+                            </font>
 
                         </h:form>
                     </div>

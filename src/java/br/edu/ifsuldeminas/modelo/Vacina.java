@@ -23,20 +23,23 @@ public class Vacina {
     @OneToOne
     private Tipo tipo;
 
+//    @ManyToMany
+//    private List<Ingredientes> ling = new LinkedList<Ingredientes>();
+    
     @ManyToMany
-    private List<Ingredientes> ling = new LinkedList<Ingredientes>();
+   private List<Animal> ling = new LinkedList<Animal>();
 
-    public void addIngredientes(Ingredientes ing) {
-        ling.add(ing);
-    }
-
-    public List<Ingredientes> getLing() {
-        return ling;
-    }
-
-    public void setLing(List<Ingredientes> ling) {
-        this.ling = ling;
-    }
+//    public void addIngredientes(Ingredientes ing) {
+//        ling.add(ing);
+//    }
+//
+//    public List<Ingredientes> getLing() {
+//        return ling;
+//    }
+//
+//    public void setLing(List<Ingredientes> ling) {
+//        this.ling = ling;
+//    }
 
     public Integer getId() {
         return id;

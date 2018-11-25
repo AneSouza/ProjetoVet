@@ -60,11 +60,11 @@ public class Autorizador implements PhaseListener{
     		return;
     	}
 
-	    // Obt�m usu�rio da sess�o
+	    // Obtem usuario da sessao
 	    Pessoa user = 
 	    	(Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
 
-	    // se h� usu�rio logado, ele pode acessar as p�ginas
+	    // se ha usuario logado, ele pode acessar as seguintes paginas
 	    if(user!= null) {
 	    	
 
@@ -75,13 +75,20 @@ public class Autorizador implements PhaseListener{
 	    	else if (nomePagina.equals("/pedido.xhtml")) {
 	    		return;
 	    	}
+                
                 else if (nomePagina.equals("/vacina.xhtml")) {
 	    		return;
 	    	}
+                
                 else if (nomePagina.equals("/cadVacina.xhtml")) {
 	    		return;
 	    	}
+                
                 else if (nomePagina.equals("/enderecos.xhtml")) {
+	    		return;
+	    	}
+                
+                else if (nomePagina.equals("/tipo.xhtml")) {
 	    		return;
 	    	}
                 
@@ -105,7 +112,7 @@ public class Autorizador implements PhaseListener{
 	        return;
 	    }
 
-	    // se n�o h�, o usu�rio � redirecionado para o login
+	    // se nao ha, o usuario e redirecionado para o login
 	    NavigationHandler handler = context.getApplication().getNavigationHandler();
 	    handler.handleNavigation(context, null, "/conta2?faces-redirect=true");
 	    context.renderResponse();
