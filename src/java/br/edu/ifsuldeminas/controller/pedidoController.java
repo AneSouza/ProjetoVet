@@ -23,26 +23,8 @@ public class pedidoController {
     private Integer endId;
     private Integer vacinaId;
     private Integer pagId;
-    private List<Carrinho> carrinho;
-    private boolean render;
+
     private String login, senha;
-
-/////////////////////////////////// VERIFICAR QUAL PODE APAGAR
-    public boolean isRender() {
-        return render;
-    }
-
-    public void setRender(boolean render) {
-        this.render = render;
-    }
-
-    public List<Carrinho> getCarrinho() {
-        return carrinho;
-    }
-
-    public void setCarrinho(List<Carrinho> carrinho) {
-        this.carrinho = carrinho;
-    }
 
 /////////////////////////////////// get e set
     public Integer getEndId() {
@@ -98,72 +80,43 @@ public class pedidoController {
         this.vacinaId = vacinaId;
     }
 
-///////////////////////////////////VERFIF
-    public List<Vacina> getTodosProdutos() {
-        return new DAO<Vacina>(Vacina.class).listaTodos();
-    }
 
-///////////////////////////////////VERFIF
-    public List<Carrinho> getItensDoPedido() {
-        return pedido.getCarrinho();
-    }
-
-///////////////////////////////////VERFIF
-    public List<Carrinho> getItensDoPedido(Pedido p) {
-        for (Carrinho pro : p.getCarrinho()) {
-            System.out.println("\n\n\n>>>>>" + pro.getProduto().getNome() + "<<<<<\n");
+/////////////////////////////////// gravar vacina
+    public void gravarCartao() {
+//        Tipo t = new DAO<Tipo>(Tipo.class).listaPorId(this.tipoId);
+//        vacina.setTipo(t);
+        if (this.pedido.getId() == null) {
+            new DAO<Pedido>(Pedido.class).adiciona(pedido);
+        } else {
+            new DAO<Pedido>(Pedido.class).atualiza(pedido);
         }
-        return p.getCarrinho();
+        this.pedido = new Pedido();
+       
     }
+    
+     public void inserir(Pedido pedido) {
 
-///////////////////////////////////VERFIF
-    public void removerItem(Carrinho item) {
-        pedido.getCarrinho().remove(item);
-
-    }
-
-//////////////////////////////////func. gravar cartao
-    public void gravar() {
-        try {
-
-            FacesContext context = FacesContext.getCurrentInstance();
-            Pessoa cliente = (Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
-            System.out.println("\n\n >>>>>>>>>>>" + this.endId + "<<<<<<<<<<<<<<\n\n");
-            Animal end = new DAO<Animal>(Animal.class).listaPorId(endId);
-
-            pedido.setPessoa(cliente);
-            pedido.setStatus(true);
-            pedido.setEnd(end);
-            cliente.getPeds().add(pedido);
-
-            if (this.pedido.getId() == null) {
-                new DAO<Pedido>(Pedido.class).adiciona(pedido);
-            } else {
-                new DAO<Pedido>(Pedido.class).atualiza(pedido);
-            }
-
-            this.pedido = new Pedido();
-            this.endId = null;
-
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("pedido", new FacesMessage("Selecione um Animal!"));
-
+        if (pedido.getId() == null) {
+            new DAO<Pedido>(Pedido.class).adiciona(pedido);
+        } else {
+            new DAO<Pedido>(Pedido.class).atualiza(pedido);
         }
+        this.pedido = new Pedido();
     }
 
 ///////////////////////////////////VERFIF atualiza
-    private void atualiza() {
-        List<Carrinho> listaItens = new CarrinhoDAO().listaPorPedido(pedido);
-        DAO<Carrinho> d = new DAO<Carrinho>(Carrinho.class);
+//    private void atualiza() {
+//        List<Carrinho> listaItens = new CarrinhoDAO().listaPorPedido(pedido);
+//        DAO<Carrinho> d = new DAO<Carrinho>(Carrinho.class);
+//
+//        for (Carrinho i : listaItens) {
+//            d.remove(i.getId());
+//        }
+//        new DAO<Pedido>(Pedido.class).atualiza(pedido);
+//
+//    }
 
-        for (Carrinho i : listaItens) {
-            d.remove(i.getId());
-        }
-        new DAO<Pedido>(Pedido.class).atualiza(pedido);
-
-    }
-
-///////////////////////////////////VERFIF
+///////////////////////////////////lista os dados do cartao
     public List<Pedido> getTodosPedidos() {
         return new DAO<Pedido>(Pedido.class).listaTodos();
     }
@@ -188,50 +141,18 @@ public class pedidoController {
         return p.getEnds();
 
     }
-
-///////////////////////////////////VERFIF
-    public List<Pedido> getPedidosAtivos() {
-
-        List<Pedido> peds = new PedidoDAO().pedidosativos();
-
-        return peds;
-
+/////////////////////////////////// listar vacina
+    public List<Vacina> getTodasVacinas() {
+        return new DAO<Vacina>(Vacina.class).listaTodos();
     }
-
-///////////////////////////////////VERFIF
-    public void finalizar(Pedido p) {
-        p.setStatus(false);
-        new DAO<Pedido>(Pedido.class).atualiza(p);
-
-    }
-
-///////////////////////////////////VERFIF
-    public void exibir(Pedido p) {
-        for (Carrinho car : p.getCarrinho()) {
-            System.out.println("\n\n>>>" + car.getProduto().getNome() + car.getQtde());
-
-        }
-
-        this.carrinho = p.getCarrinho();
-        this.render = true;
-
-    }
-
-///////////////////////////////////VERFIF
-    public List<Pedido> getMeusPedidos() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Pessoa p = (Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
-        return p.getPeds();
-
-    }
-
-///////////////////////////////////VERFIF
-    public boolean mostrarItens() {
-        return this.render;
-    }
-
-    public List<Carrinho> getItensdoPedido() {
-        return this.carrinho;
-    }
+    
+///////////////////////////////////verif
+//    public List<Pedido> getTodosCartoes() {
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        Pessoa p = (Pessoa) context.getExternalContext().getSessionMap().get("usuariologado");
+//
+//        return p.getPeds();
+//
+//    }
 
 }

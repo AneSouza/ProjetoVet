@@ -1,11 +1,8 @@
 package br.edu.ifsuldeminas.dao;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
-import br.edu.ifsuldeminas.modelo.Pedido;
 import br.edu.ifsuldeminas.modelo.Vacina;
 
 public class VacinaDAO {
@@ -23,7 +20,7 @@ public class VacinaDAO {
 
 
 
-public List<Vacina> listaPizza(){
+public List<Vacina> listaVacina(){
 	String jpql = "SELECT DISTINCT f FROM Vacina f "
 			+ "LEFT JOIN FETCH f.tipo "
 			+ "LEFT JOIN FETCH f.ling "
@@ -45,27 +42,4 @@ public List<Vacina> listaPizza(){
 	return lista;
 	
 }
-
-
-public List<Vacina> listaRefri(){
-	String jpql = "SELECT DISTINCT f FROM Vacina f "
-			+ "LEFT JOIN FETCH f.tipo "
-			+ "LEFT JOIN FETCH f.ling "
-			
-
-			+ "WHERE f.tipo.id = :pTipo";
-	
-	EntityManager em = JPAUtil.getEntityManager();
-	TypedQuery<Vacina> query = em.createQuery(jpql, Vacina.class);
-	query.setParameter("pTipo",2);
-	
-	System.out.println(query.toString());
-	
-	
-	List<Vacina> lista = query.getResultList();
-	
-	em.close();
-	
-	return lista;
-	
-}}
+}

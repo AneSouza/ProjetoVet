@@ -18,7 +18,7 @@ public class tipoController {
         return t;
     }
 
-//////////////alterar está bugado
+//////////////alterar está 
     public void gravar() {
 
         if (this.t.getId() == null) {

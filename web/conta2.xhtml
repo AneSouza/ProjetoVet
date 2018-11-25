@@ -9,7 +9,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       >
 
-    <ui:composition template="_template1.xhtml">
+    <ui:composition template="_template2.xhtml">
 
         <ui:define name="titulo">
             <title>Clínica Veterinária</title>
@@ -32,7 +32,8 @@
                                 <h2 align="center"> Realize seu cadastro </h2>
                                 <div class="form-group col-md-6">
                                     <B><h:outputText value="Nome" for="nome"/></B>
-                                    <h:inputText id="nome"  class="form-control" value="#{pessoaController.pessoa.nome}"
+                                    <h:inputText id="nome"  class="form-control" 
+                                                 value="#{pessoaController.pessoa.nome}"
                                                  required="true" requiredMessage="Nome obrigatório!">
                                         <f:ajax event ="blur" render = "msg"/>
                                     </h:inputText>

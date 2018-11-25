@@ -3,14 +3,12 @@ package br.edu.ifsuldeminas.modelo;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -18,133 +16,88 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Pedido {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private Double valor;
-	private Double troco;
-	private String obs;
-	private Boolean status;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar data = Calendar.getInstance();
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String obs;
+    private String nomeAnim;
+    private String nomeVac;
+    private String doseVac;
 
-
-	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true , mappedBy="pedido")
-	private List<Carrinho> carrinho = new LinkedList<Carrinho>();
-	
-	@OneToOne
-	private Pessoa pessoa;
-	
-	@OneToOne
-	private Animal end;
-	
-	
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar data = Calendar.getInstance();
 
 
-	public String getObs() {
-		return obs;
-	}
+//	
+    @OneToOne
+    private Pessoa pessoa;
 
-	public void setObs(String obs) {
-		this.obs = obs;
-	}
+    @OneToOne
+    private Animal end;
 
-	public Double getTroco() {
-		return troco;
-	}
+    public String getObs() {
+        return obs;
+    }
 
-	public void setTroco(Double troco) {
-		this.troco = troco;
-	}
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
 
-	public Boolean getStatus() {
-		return status;
-	}
+    public Animal getEnd() {
+        return end;
+    }
 
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
+    public void setEnd(Animal end) {
+        this.end = end;
+    }
 
-	public Animal getEnd() {
-		return end;
-	}
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
 
-	public void setEnd(Animal end) {
-		this.end = end;
-	}
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void add(Carrinho produto) {
-		this.carrinho.add(produto);
-	}
-	
-	public Double getValorTotal() {
-		valor = 0.0;
-		
-		for(Carrinho produto : carrinho){
-			valor += produto.getValor() * produto.getQtde();
-		}
-		
-		return valor;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
+    public Calendar getData() {
+        return data;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setData(Calendar data) {
+        this.data = data;
+    }
 
-	public Double getValor() {
-		return valor;
-	}
+    public String getNomeAnim() {
+        return nomeAnim;
+    }
 
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
+    public void setNomeAnim(String nomeAnim) {
+        this.nomeAnim = nomeAnim;
+    }
 
-	public Calendar getData() {
-		return data;
-	}
+    public String getNomeVac() {
+        return nomeVac;
+    }
 
-	public void setData(Calendar data) {
-		this.data = data;
-	}
+    public void setNomeVac(String nomeVac) {
+        this.nomeVac = nomeVac;
+    }
 
-	public List<Carrinho> getCarrinho() {
-		return carrinho;
-	}
+    public String getDoseVac() {
+        return doseVac;
+    }
 
-	public void setItens(List<Carrinho> carrinho) {
-		this.carrinho = carrinho;
-	}
-
-
-
-	public void setCarrinho(List<Carrinho> carrinho) {
-		this.carrinho = carrinho;
-	}
-
-
-	
-
-
-
-	
-
-	
-
-	
-
+    public void setDoseVac(String doseVac) {
+        this.doseVac = doseVac;
+    }
 
 }
